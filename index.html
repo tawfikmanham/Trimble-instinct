@@ -14,18 +14,37 @@
       <div class="vehicle"><img src="assets/wheel.png" alt=""> <strong>STOPPED</strong></div>
       <div class="driver">
         <img class="region" src="assets/region.png" alt="United States">
-        <img class="alerts" src="assets/alerts.png" alt="4 notifications">
-        <div class="duty"><img src="assets/duty.png" alt=""><strong>ON(YM)</strong><span class="chevron" aria-hidden="true"></span></div>
+        <img class="alerts" data-screen="navigation" src="assets/alerts.png" alt="4 notifications">
+        <img class="alerts" data-screen="summary" src="assets/summary-alerts.png" alt="2 notifications" hidden>
+        <div class="duty"><img src="assets/duty.png" alt=""><strong data-screen="navigation">ON(YM)</strong><strong data-screen="summary" hidden>ON(D)</strong><span class="chevron" aria-hidden="true"></span></div>
         <div class="profile" aria-label="TM profile">TM</div>
       </div>
     </header>
     <div class="workspace">
-      <aside class="sections" aria-label="App sections">
-        <div class="tile"><img src="assets/summary.png" alt="">SUMMARY</div>
+      <nav class="sections" aria-label="App sections">
+        <a class="tile" href="#summary"><img src="assets/summary.png" alt=""><span>SUMMARY</span></a>
         <div class="tile"><img src="assets/hos.png" alt="">HOS</div>
-        <div class="tile" aria-current="page"><img src="assets/navigation.png" alt=""><span>NAVIGATION</span></div>
-      </aside>
-      <section class="navigation" aria-label="Current route">
+        <a class="tile" href="#navigation" aria-current="page"><img src="assets/navigation.png" alt=""><span>NAVIGATION</span></a>
+      </nav>
+      <section id="summary" class="summary-screen" data-screen="summary" aria-label="Summary" hidden>
+        <div class="fuel-card">
+          <div class="fuel-gauge" role="img" aria-label="Fuel economy: 0 miles per gallon, average 0">
+            <div class="fuel-average"><strong>0</strong> AVG</div>
+            <strong class="fuel-reading">0</strong>
+            <strong class="fuel-unit">MPG</strong>
+          </div>
+        </div>
+        <div class="summary-widgets">
+          <div class="oer-card">
+            <p>The OER driving screen widget is<br> not available. Please contact your<br> administrator to install the associated app.</p>
+          </div>
+          <div class="audio-card">
+            <div class="audio-label">Play Audio</div>
+            <img src="assets/summary-play.png" alt="">
+          </div>
+        </div>
+      </section>
+      <section id="navigation" class="navigation" data-screen="navigation" aria-label="Current route">
         <img class="map" src="assets/map.png" alt="Simulated navigation map with the highlighted route and a 35 mph speed limit.">
         <div class="guidance">
           <div class="next-turn">
