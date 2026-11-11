@@ -536,17 +536,17 @@ a.tile:focus-visible { outline: .16cqw solid #fff; outline-offset: -.3cqw; }
   aspect-ratio: 1;
   padding: 0;
   border: 0;
-  background: #22252ef2;
-  color: #fafbfc;
+  background: #fafbfce0;
+  color: #22252e;
   cursor: pointer;
 }
 .map-control .material-symbol { --icon-size: max(22.5px, 3.525cqw); }
-.map-control:disabled { color: #858896; cursor: default; }
-.map-control:focus-visible, .map-menu button:focus-visible { outline: 2px solid #fff; outline-offset: -3px; }
+.map-control:disabled { color: #656976; cursor: default; }
+.map-control:focus-visible { outline: 2px solid #22252e; outline-offset: -3px; }
+.map-menu button:focus-visible { outline: 2px solid #fff; outline-offset: -3px; }
 .map-menu-toggle {
   margin-bottom: var(--space-1);
   background: #fafbfc;
-  color: #22252e;
 }
 .map-menu {
   position: absolute;
