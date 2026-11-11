@@ -106,6 +106,11 @@ body {
 .tile img { width: 3.2cqw; }
 .tile:first-child, .tile:nth-child(2) { padding-bottom: 1.3cqw; }
 .tile:last-child { justify-content: end; padding-bottom: .85cqw; }
+.tile[aria-current="page"] span {
+  text-decoration: underline solid #ffce00 max(1px, .16cqw);
+  text-underline-offset: .23cqw;
+  text-decoration-skip-ink: none;
+}
 
 .navigation {
   position: relative;
