@@ -117,10 +117,18 @@
           <div class="map-camera">
             <svg class="map-plane" viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
               <defs>
+                <pattern id="outer-streets" x="-75" y="-36" width="360" height="240" patternUnits="userSpaceOnUse">
+                  <rect width="360" height="240" fill="#252c28"/>
+                  <path d="M8 78H104V151H8ZM235 151H352V233H235Z" fill="#29392f"/>
+                  <path id="outer-road-grid" d="M0 0H360M0 70H360M0 156H360M0 240H360M0 0V240M110 0V240M229 0V240M360 0V240" fill="none"/>
+                  <use href="#outer-road-grid" stroke="#53564a" stroke-width="9"/>
+                  <use href="#outer-road-grid" stroke="#363d35" stroke-width="6"/>
+                </pattern>
                 <path id="local-roads" d="M-40 98H350L445 52H1040M-40 162H347L455 108H1040M-40 233H340L451 175H1040M-40 373H326L400 428H1040M-40 460H304L369 511M89-40V540M181-40V540M274-40V540M365-40V63L315 93V220L340 255V395M505-40V253M619-40V245M744-40V540M872-40V540M967-40V540M475 351V540M612 356V540M764 371H1040"/>
                 <path id="main-road" d="M-40 323H333L451 293H715L820 320H1040M417-40V29L450 70V293L416 349V540"/>
                 <path id="demo-route" d="M110 323H333L450 293V175H619V108H792"/>
               </defs>
+              <rect x="-1000" y="-500" width="3000" height="1500" fill="url(#outer-streets)"/>
               <rect width="1000" height="500" fill="#252c28"/>
               <path fill="#29392f" d="M0 0H175V95H0ZM745 176H867V293H745ZM0 378H87V500H0ZM478 433H609V500H478ZM874 374H965V456H874Z"/>
               <path fill="#1f3b44" d="M702 0H913Q910 19 880 29T803 39Q769 35 738 49L696 49Q670 31 702 0Z"/>
@@ -163,7 +171,7 @@
           <strong>Map view</strong>
           <button type="button" data-map-view="overview" aria-pressed="false">Route overview</button>
           <button type="button" data-map-view="guidance" aria-pressed="true">Tilted guidance</button>
-          <button type="button" class="map-reset">Reset zoom</button>
+          <button type="button" class="map-reset">Reset map position</button>
         </div>
         <div class="map-speed" role="img" aria-label="Speed limit 35 miles per hour"><span>SPEED<br>LIMIT</span><strong>35</strong></div>
         <button class="map-control map-voice" type="button" aria-label="Mute voice guidance" aria-pressed="false"><span class="material-symbol" aria-hidden="true">volume_up</span></button>

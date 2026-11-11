@@ -494,15 +494,18 @@ a.tile:focus-visible { outline: .16cqw solid #fff; outline-offset: -.3cqw; }
   inset: 0;
   height: 81.45%;
   overflow: hidden;
+  touch-action: none;
   background: #252c28;
 }
 .map-camera, .map-plane { display: block; width: 100%; height: 100%; }
 .map-camera {
+  translate: var(--map-pan-x, 0px) var(--map-pan-y, 0px);
   transform: scale(var(--map-zoom, 1));
   transform-origin: 43% 58%;
   transition: transform 200ms ease-out;
 }
 .map-plane {
+  overflow: visible;
   transform-origin: 43% 60%;
   transition: transform 240ms cubic-bezier(.65, 0, .35, 1);
 }

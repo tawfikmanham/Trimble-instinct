@@ -12,13 +12,36 @@ const mapViewOptions = [...mapMenu.querySelectorAll('[data-map-view]')];
 const mapZoomLevels = [.85, 1, 1.25, 1.55, 1.9, 2.3];
 const defaultMapZoom = 1;
 let mapZoomIndex = defaultMapZoom;
+let mapPanX = 0;
+let mapPanY = 0;
+let touchCenter;
+
+function updateMapReset() {
+  mapReset.disabled = mapZoomIndex === defaultMapZoom && mapPanX === 0 && mapPanY === 0;
+}
+
+function setMapPan(x, y) {
+  const scale = mapZoomLevels[mapZoomIndex];
+  const limitX = mapViewport.clientWidth * scale * .65;
+  const limitY = mapViewport.clientHeight * scale * .55;
+  mapPanX = Math.max(-limitX, Math.min(limitX, x));
+  mapPanY = Math.max(-limitY, Math.min(limitY, y));
+  mapViewport.style.setProperty('--map-pan-x', `${mapPanX}px`);
+  mapViewport.style.setProperty('--map-pan-y', `${mapPanY}px`);
+  updateMapReset();
+}
 
 function setMapZoom(index) {
   mapZoomIndex = Math.max(0, Math.min(mapZoomLevels.length - 1, index));
   mapViewport.style.setProperty('--map-zoom', mapZoomLevels[mapZoomIndex]);
   mapZoomIn.disabled = mapZoomIndex === mapZoomLevels.length - 1;
   mapZoomOut.disabled = mapZoomIndex === 0;
-  mapReset.disabled = mapZoomIndex === defaultMapZoom;
+  setMapPan(mapPanX, mapPanY);
+}
+
+function resetMapPosition() {
+  setMapPan(0, 0);
+  setMapZoom(defaultMapZoom);
 }
 
 function setMapView(view) {
@@ -32,7 +55,7 @@ function setMapView(view) {
   for (const option of mapViewOptions) {
     option.setAttribute('aria-pressed', String(option.dataset.mapView === view));
   }
-  setMapZoom(defaultMapZoom);
+  resetMapPosition();
 }
 
 function setMapMenuOpen(open) {
@@ -41,6 +64,34 @@ function setMapMenuOpen(open) {
 }
 
 setMapZoom(defaultMapZoom);
+mapViewport.addEventListener('wheel', (event) => {
+  if (event.ctrlKey) return;
+  event.preventDefault();
+  const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? mapViewport.clientHeight : 1;
+  setMapPan(mapPanX - event.deltaX * unit, mapPanY - event.deltaY * unit);
+}, { passive: false });
+
+function getTouchCenter(touches) {
+  if (touches.length !== 2) return;
+  return {
+    x: (touches[0].clientX + touches[1].clientX) / 2,
+    y: (touches[0].clientY + touches[1].clientY) / 2,
+  };
+}
+
+for (const type of ['touchstart', 'touchend', 'touchcancel']) {
+  mapViewport.addEventListener(type, (event) => { touchCenter = getTouchCenter(event.touches); });
+}
+mapViewport.addEventListener('touchmove', (event) => {
+  const next = getTouchCenter(event.touches);
+  if (touchCenter && next) {
+    setMapPan(mapPanX + next.x - touchCenter.x, mapPanY + next.y - touchCenter.y);
+  }
+  touchCenter = next;
+});
+window.addEventListener('resize', () => {
+  if (mapViewport.clientWidth) setMapPan(mapPanX, mapPanY);
+});
 mapZoomIn.addEventListener('click', () => setMapZoom(mapZoomIndex + 1));
 mapZoomOut.addEventListener('click', () => setMapZoom(mapZoomIndex - 1));
 mapMenuToggle.addEventListener('click', () => setMapMenuOpen(mapMenu.hidden));
@@ -55,7 +106,7 @@ for (const option of mapViewOptions) {
   });
 }
 mapReset.addEventListener('click', () => {
-  setMapZoom(defaultMapZoom);
+  resetMapPosition();
   setMapMenuOpen(false);
   mapMenuToggle.focus();
 });
