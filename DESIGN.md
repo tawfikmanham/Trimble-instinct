@@ -26,7 +26,8 @@
 
 - Use Roboto with Arial and sans-serif fallbacks. Size dashboard labels relative to the frame so they scale for landscape previews.
 - Give the primary reading or instruction the largest type. Use bold uppercase for sidebar labels and units. Keep explanatory text and secondary readings subordinate to the primary reading.
-- Use vector icons on transparent backgrounds. Keep yellow for active states, notifications, and turn guidance.
+- Use [Material Symbols Outlined](https://developers.google.com/fonts/docs/material_symbols) from Google Fonts for UI icons. Add new icon names to the alphabetized font subset in `index.html` and set fill and size through the shared icon style. Keep yellow for active states, notifications, and turn guidance.
+- The audio morph uses the Material play and pause silhouettes as its endpoints. The map and region flag are artwork.
 
 ## Motion
 

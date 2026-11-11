@@ -5,75 +5,59 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#22252e">
   <title>Navigation prototype · Baseline</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&amp;icon_names=bed,close,directions_car,expand_more,navigation,notifications,pause,star,timelapse,timer,turn_left,turn_right&amp;display=block">
   <link rel="stylesheet" href="styles.css">
   <script src="navigation.js" defer></script>
 </head>
 <body>
   <main class="dashboard" aria-label="Driver navigation prototype">
     <header class="status-bar">
-      <div class="vehicle"><img src="assets/wheel.png" alt=""> <strong>STOPPED</strong></div>
+      <div class="vehicle"><span class="material-symbol vehicle-icon" aria-hidden="true">directions_car</span> <strong>STOPPED</strong></div>
       <div class="driver">
         <img class="region" src="assets/region.png" alt="United States">
         <div class="alerts">
-          <svg class="alerts-bell" viewBox="0 0 24 24" aria-hidden="true">
-            <path fill="currentColor" d="M12 22a2 2 0 0 0 2-2h-4a2 2 0 0 0 2 2Zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4a1.5 1.5 0 0 0-3 0v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2Z"/>
-          </svg>
+          <span class="material-symbol alerts-bell" aria-hidden="true">notifications</span>
           <span class="alerts-count" data-screen="navigation" aria-label="4 notifications" role="img">4</span>
           <span class="alerts-count" data-screen="summary hos" aria-label="2 notifications" role="img" hidden>2</span>
         </div>
         <button class="duty" type="button" aria-haspopup="dialog" aria-controls="duty-dialog" aria-expanded="false">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" aria-hidden="true">
-            <circle cx="12" cy="14" r="8"/>
-            <path d="M12 14v-4M9.5 2h5m3.2 5 1.5-1.5"/>
-          </svg>
+          <span class="material-symbol duty-timer" aria-hidden="true">timer</span>
           <strong id="duty-label">ON(YM)</strong>
-          <span class="chevron" aria-hidden="true"></span>
+          <span class="material-symbol chevron" aria-hidden="true">expand_more</span>
         </button>
         <div class="profile" aria-label="TM profile">TM</div>
       </div>
     </header>
     <dialog id="duty-dialog" class="duty-dialog" aria-labelledby="duty-title">
       <div class="duty-panel">
-        <svg class="duty-symbols" aria-hidden="true">
-          <symbol id="duty-car" viewBox="0 0 24 24">
-            <path fill="currentColor" fill-rule="evenodd" d="M5.2 3h13.6l2.7 7.5V20a1 1 0 0 1-2 0v-1.5h-15V20a1 1 0 0 1-2 0v-9.5L5.2 3Zm1.4 1.7-1.8 5.2h14.4l-1.8-5.2H6.6ZM7 12a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Zm10 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Z"/>
-          </symbol>
-        </svg>
         <header class="duty-dialog-header">
           <h2 id="duty-title">Choose Status</h2>
           <button class="duty-close" type="button" aria-label="Close status chooser">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+            <span class="material-symbol" aria-hidden="true">close</span>
           </button>
         </header>
         <div class="duty-options" role="group" aria-label="Duty status">
-          <button class="duty-option driving" type="button" data-duty="ON(D)" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#duty-car"/></svg>Driving</button>
-          <button class="duty-option on" type="button" data-duty="ON" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#duty-car"/></svg>ON</button>
-          <button class="duty-option sleeper" type="button" data-duty="SB" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M2 19v-8h20v8M2 16h20M4 11V7a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v4m0-4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v4"/></svg>Sleeper Berth</button>
-          <button class="duty-option yard" type="button" data-duty="ON(YM)" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#duty-car"/></svg>Yard Move</button>
-          <button class="duty-option personal" type="button" data-duty="OFF(PC)" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#duty-car"/></svg>Personal Conveyance</button>
-          <button class="duty-option off" type="button" data-duty="OFF" aria-pressed="false"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 4h6v16H4zM14 4h6v16h-6z"/></svg>OFF</button>
+          <button class="duty-option driving" type="button" data-duty="ON(D)" aria-pressed="false"><span class="material-symbol" aria-hidden="true">directions_car</span>Driving</button>
+          <button class="duty-option on" type="button" data-duty="ON" aria-pressed="false"><span class="material-symbol" aria-hidden="true">directions_car</span>ON</button>
+          <button class="duty-option sleeper" type="button" data-duty="SB" aria-pressed="false"><span class="material-symbol" aria-hidden="true">bed</span>Sleeper Berth</button>
+          <button class="duty-option yard" type="button" data-duty="ON(YM)" aria-pressed="false"><span class="material-symbol" aria-hidden="true">directions_car</span>Yard Move</button>
+          <button class="duty-option personal" type="button" data-duty="OFF(PC)" aria-pressed="false"><span class="material-symbol" aria-hidden="true">directions_car</span>Personal Conveyance</button>
+          <button class="duty-option off" type="button" data-duty="OFF" aria-pressed="false"><span class="material-symbol" aria-hidden="true">pause</span>OFF</button>
         </div>
       </div>
     </dialog>
     <div class="workspace">
       <nav class="sections" aria-label="App sections" tabindex="0">
         <a class="tile" href="#summary">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="m12 2.2 2.95 6 6.62.96-4.79 4.67 1.13 6.6L12 17.31l-5.91 3.12 1.13-6.6-4.79-4.67 6.62-.96Z"/>
-          </svg>
+          <span class="material-symbol" aria-hidden="true">star</span>
           <span>SUMMARY</span>
         </a>
         <a class="tile" href="#hos">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/>
-            <path fill="currentColor" d="M12 5.4a6.6 6.6 0 1 1-4.67 11.27L12 12Z"/>
-          </svg>
+          <span class="material-symbol" aria-hidden="true">timelapse</span>
           <span>HOS</span>
         </a>
         <a class="tile" href="#navigation" aria-current="page">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M12 2.5 2.7 21.4l9.3-3.5 9.3 3.5Z"/>
-          </svg>
+          <span class="material-symbol" aria-hidden="true">navigation</span>
           <span>NAVIGATION</span>
         </a>
       </nav>
@@ -139,10 +123,10 @@
         <img class="map" src="assets/map.png" alt="Simulated navigation map with the highlighted route and a 35 mph speed limit.">
         <div class="guidance">
           <div class="next-turn">
-            <img src="assets/left-turn.png" alt="">
+            <span class="material-symbol" aria-hidden="true">turn_left</span>
             <div>350<span> ft</span></div>
           </div>
-          <div class="then-turn"><img src="assets/right-turn.png" alt="Then turn right">50 ft</div>
+          <div class="then-turn"><span class="material-symbol" role="img" aria-label="Then turn right">turn_right</span>50 ft</div>
           <div class="street">Xerxes Avenue South</div>
           <div class="trip">
             <div><span>DIST</span><strong>3.2<small> MI</small></strong></div>
@@ -150,19 +134,19 @@
           </div>
           <button class="preview-toggle" type="button" aria-expanded="false" aria-controls="turn-preview">
             <span>Turn left. Then turn right.</span>
-            <span class="chevron" aria-hidden="true"></span>
+            <span class="material-symbol chevron" aria-hidden="true">expand_more</span>
           </button>
         </div>
         <section id="turn-preview" class="turn-preview" aria-labelledby="preview-title" inert>
           <h1 id="preview-title">Upcoming turns</h1>
           <ol>
             <li>
-              <img src="assets/left-turn.png" alt="">
+              <span class="material-symbol" aria-hidden="true">turn_left</span>
               <div><strong>Turn left</strong><span>Xerxes Avenue South</span></div>
               <span class="distance">350 ft</span>
             </li>
             <li>
-              <img src="assets/right-turn.png" alt="">
+              <span class="material-symbol" aria-hidden="true">turn_right</span>
               <div><strong>Turn right</strong><span>After the left turn</span></div>
               <span class="distance">50 ft</span>
             </li>
