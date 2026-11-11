@@ -107,18 +107,11 @@ a.tile { color: inherit; text-decoration: none; }
 a.tile:focus-visible { outline: .16cqw solid #fff; outline-offset: -.3cqw; }
 .tile img { width: 3.2cqw; }
 .tile:first-child, .tile:nth-child(2) { padding-bottom: 1.3cqw; }
-.tile:last-child { justify-content: end; padding-bottom: .85cqw; }
+.tile:last-child { justify-content: end; padding-bottom: 1.55cqw; }
 .tile[aria-current="page"] span {
-  text-decoration: underline solid #ffce00 max(1px, .16cqw);
-  text-underline-offset: .23cqw;
-  text-decoration-skip-ink: none;
-}
-
-.tile[href="#summary"][aria-current="page"] span {
   position: relative;
-  text-decoration: none;
 }
-.tile[href="#summary"][aria-current="page"] span::after {
+.tile[aria-current="page"] span::after {
   content: "";
   position: absolute;
   top: calc(100% + .83cqw);
