@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#22252e">
+  <title>Navigation prototype · Baseline</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="navigation.js" defer></script>
+</head>
+<body>
+  <main class="dashboard" aria-label="Driver navigation prototype">
+    <header class="status-bar">
+      <div class="vehicle"><img src="assets/wheel.png" alt=""> <strong>STOPPED</strong></div>
+      <div class="driver">
+        <img class="region" src="assets/region.png" alt="United States">
+        <img class="alerts" src="assets/alerts.png" alt="4 notifications">
+        <div class="duty"><img src="assets/duty.png" alt=""><strong>ON(YM)</strong><span class="chevron" aria-hidden="true"></span></div>
+        <div class="profile" aria-label="TM profile">TM</div>
+      </div>
+    </header>
+    <div class="workspace">
+      <aside class="sections" aria-label="App sections">
+        <div class="tile"><img src="assets/summary.png" alt="">SUMMARY</div>
+        <div class="tile"><img src="assets/hos.png" alt="">HOS</div>
+        <div class="tile"><img src="assets/navigation.png" alt="">NAVIGATION</div>
+      </aside>
+      <section class="navigation" aria-label="Current route">
+        <img class="map" src="assets/map.png" alt="Simulated navigation map with the highlighted route and a 35 mph speed limit.">
+        <div class="guidance">
+          <div class="next-turn">
+            <img src="assets/left-turn.png" alt="">
+            <div>350<span> ft</span></div>
+          </div>
+          <div class="then-turn"><img src="assets/right-turn.png" alt="Then turn right">50 ft</div>
+          <div class="street">Xerxes Avenue South</div>
+          <div class="trip">
+            <div><span>DIST</span><strong>3.2<small> MI</small></strong></div>
+            <div><span>ETA</span><strong>12:12</strong></div>
+          </div>
+          <button class="preview-toggle" type="button" aria-expanded="false" aria-controls="turn-preview">
+            <span>Turn left. Then turn right.</span>
+            <span class="chevron" aria-hidden="true"></span>
+          </button>
+        </div>
+        <section id="turn-preview" class="turn-preview" aria-labelledby="preview-title" inert>
+          <h1 id="preview-title">Upcoming turns</h1>
+          <ol>
+            <li>
+              <img src="assets/left-turn.png" alt="">
+              <div><strong>Turn left</strong><span>Xerxes Avenue South</span></div>
+              <span class="distance">350 ft</span>
+            </li>
+            <li>
+              <img src="assets/right-turn.png" alt="">
+              <div><strong>Turn right</strong><span>After the left turn</span></div>
+              <span class="distance">50 ft</span>
+            </li>
+          </ol>
+        </section>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
