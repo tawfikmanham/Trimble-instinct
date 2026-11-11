@@ -176,21 +176,23 @@
             </svg>
           </div>
         </div>
-        <div class="map-tools" role="group" aria-label="Map controls">
-          <button class="map-control map-menu-toggle" type="button" aria-label="Map menu" aria-expanded="false" aria-controls="map-menu"><span class="material-symbol" aria-hidden="true">menu</span></button>
-          <button class="map-control map-view-toggle" type="button" aria-label="Show route overview"><span class="material-symbol" aria-hidden="true">map</span></button>
-          <button class="map-control map-zoom-in" type="button" aria-label="Zoom in"><span class="material-symbol" aria-hidden="true">add</span></button>
-          <button class="map-control map-zoom-out" type="button" aria-label="Zoom out"><span class="material-symbol" aria-hidden="true">remove</span></button>
+        <div class="map-overlay">
+          <div class="map-tools" role="group" aria-label="Map controls">
+            <button class="map-control map-menu-toggle" type="button" aria-label="Map menu" aria-expanded="false" aria-controls="map-menu"><span class="material-symbol" aria-hidden="true">menu</span></button>
+            <button class="map-control map-view-toggle" type="button" aria-label="Show route overview"><span class="material-symbol" aria-hidden="true">map</span></button>
+            <button class="map-control map-zoom-in" type="button" aria-label="Zoom in"><span class="material-symbol" aria-hidden="true">add</span></button>
+            <button class="map-control map-zoom-out" type="button" aria-label="Zoom out"><span class="material-symbol" aria-hidden="true">remove</span></button>
+          </div>
+          <div class="map-menu" id="map-menu" hidden>
+            <strong>Map view</strong>
+            <button type="button" data-map-view="overview" aria-pressed="false">Route overview</button>
+            <button type="button" data-map-view="guidance" aria-pressed="true">Tilted guidance</button>
+            <button type="button" class="map-reset">Reset map position</button>
+          </div>
+          <div class="map-speed" role="img" aria-label="Speed limit 35 miles per hour"><span>SPEED<br>LIMIT</span><strong>35</strong></div>
+          <button class="map-control map-voice" type="button" aria-label="Mute voice guidance" aria-pressed="false"><span class="material-symbol" aria-hidden="true">volume_up</span></button>
+          <button class="map-demo" type="button"><span class="material-symbol" aria-hidden="true">play_arrow</span><span>Play drive</span></button>
         </div>
-        <div class="map-menu" id="map-menu" hidden>
-          <strong>Map view</strong>
-          <button type="button" data-map-view="overview" aria-pressed="false">Route overview</button>
-          <button type="button" data-map-view="guidance" aria-pressed="true">Tilted guidance</button>
-          <button type="button" class="map-reset">Reset map position</button>
-        </div>
-        <div class="map-speed" role="img" aria-label="Speed limit 35 miles per hour"><span>SPEED<br>LIMIT</span><strong>35</strong></div>
-        <button class="map-control map-voice" type="button" aria-label="Mute voice guidance" aria-pressed="false"><span class="material-symbol" aria-hidden="true">volume_up</span></button>
-        <button class="map-demo" type="button"><span class="material-symbol" aria-hidden="true">play_arrow</span><span>Play drive</span></button>
         <div class="guidance">
           <div class="next-turn">
             <span class="material-symbol" aria-hidden="true">turn_left</span>
