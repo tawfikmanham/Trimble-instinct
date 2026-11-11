@@ -15,6 +15,8 @@ body {
 }
 
 .dashboard {
+  --space-1: 8px;
+  --space-2: 16px;
   width: min(100%, calc(100dvh * 16 / 9));
   aspect-ratio: 16 / 9;
   container-type: inline-size;
@@ -29,7 +31,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-inline: 1.85cqw 2cqw;
+  padding-inline: var(--space-2);
 }
 
 .vehicle, .driver, .duty {
@@ -108,8 +110,8 @@ body {
 .workspace {
   display: grid;
   grid-template-columns: 20.41cqw minmax(0, 1fr);
-  gap: .86cqw;
-  padding: .31cqw .31cqw .31cqw .82cqw;
+  gap: var(--space-1);
+  padding: var(--space-2);
   min-height: 0;
 }
 
@@ -117,8 +119,7 @@ body {
   display: grid;
   grid-auto-rows: 15.44cqw;
   align-content: start;
-  gap: .82cqw;
-  padding-block: .55cqw;
+  gap: var(--space-1);
   min-height: 0;
   overflow-y: auto;
   overscroll-behavior-y: contain;
@@ -154,19 +155,22 @@ a.tile:focus-visible { outline: .16cqw solid #fff; outline-offset: -.3cqw; }
 }
 
 .summary-screen {
-  --summary-gap: 1.25cqw;
-  --widget-padding: 1.6cqw;
   display: grid;
-  grid-template-rows: minmax(0, 800fr) minmax(0, 268fr);
-  gap: var(--summary-gap);
-  margin: .55cqw;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: var(--space-1);
+  min-width: 0;
+  min-height: 0;
 }
 .summary-screen[hidden] { display: none; }
 .fuel-card, .oer-card, .audio-card { background: #333543; }
-.fuel-card { display: grid; place-items: center; }
+.fuel-card {
+  container-type: size;
+  display: grid;
+  place-items: center;
+}
 .fuel-gauge {
   position: relative;
-  width: 27cqw;
+  width: min(35cqw, 85cqh);
   aspect-ratio: 1;
   border-radius: 50%;
   box-shadow: inset 0 0 1.8cqw .32cqw #181a24b5;
@@ -185,17 +189,17 @@ a.tile:focus-visible { outline: .16cqw solid #fff; outline-offset: -.3cqw; }
 }
 .fuel-gauge::before { left: -.55cqw; width: 2.75cqw; height: .13cqw; }
 .fuel-gauge::after { left: -1.08cqw; width: 1.06cqw; aspect-ratio: 1; border-radius: 50%; }
-.fuel-average { font-size: 1.32cqw; margin-bottom: .63cqw; }
-.fuel-average strong { font-size: 1.8cqw; margin-right: .32cqw; }
-.fuel-reading { font-size: 5.65cqw; }
-.fuel-unit { font-size: 2.23cqw; margin-top: .12cqw; }
+.fuel-average { font-size: min(1.7cqw, 4.15cqh); margin-bottom: var(--space-1); }
+.fuel-average strong { font-size: min(2.3cqw, 5.65cqh); }
+.fuel-reading { font-size: min(7.35cqw, 17.8cqh); }
+.fuel-unit { font-size: min(2.9cqw, 7cqh); }
 
 .summary-widgets {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--summary-gap);
+  gap: var(--space-1);
 }
-.oer-card, .audio-card { padding: var(--widget-padding); }
+.oer-card, .audio-card { padding: var(--space-2); }
 .oer-card {
   display: grid;
   place-items: center;
@@ -209,12 +213,12 @@ a.tile:focus-visible { outline: .16cqw solid #fff; outline-offset: -.3cqw; }
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
-  gap: var(--summary-gap);
+  gap: var(--space-1);
 }
 .audio-label {
   display: grid;
   align-content: center;
-  gap: 1.05cqw;
+  gap: var(--space-1);
   font-size: 1.6cqw;
 }
 .audio-label::after {
