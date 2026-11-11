@@ -482,6 +482,7 @@ a.tile:focus-visible { outline: .16cqw solid #fff; outline-offset: -.3cqw; }
 .hos-distance strong { font-size: min(5.6cqw, 10.65cqh); white-space: nowrap; }
 
 .navigation {
+  --map-control-size: max(36px, 6cqw);
   position: relative;
   isolation: isolate;
   overflow: hidden;
@@ -531,7 +532,7 @@ a.tile:focus-visible { outline: .16cqw solid #fff; outline-offset: -.3cqw; }
 .map-control {
   display: grid;
   place-items: center;
-  width: max(24px, 4cqw);
+  width: var(--map-control-size);
   aspect-ratio: 1;
   padding: 0;
   border: 0;
@@ -539,15 +540,19 @@ a.tile:focus-visible { outline: .16cqw solid #fff; outline-offset: -.3cqw; }
   color: #fafbfc;
   cursor: pointer;
 }
-.map-control .material-symbol { --icon-size: max(15px, 2.35cqw); }
+.map-control .material-symbol { --icon-size: max(22.5px, 3.525cqw); }
 .map-control:disabled { color: #858896; cursor: default; }
 .map-control:focus-visible, .map-menu button:focus-visible { outline: 2px solid #fff; outline-offset: -3px; }
-.map-menu-toggle { background: #fafbfc; color: #22252e; }
+.map-menu-toggle {
+  margin-bottom: var(--space-1);
+  background: #fafbfc;
+  color: #22252e;
+}
 .map-menu {
   position: absolute;
   z-index: 4;
   top: var(--space-1);
-  left: calc(max(24px, 4cqw) + var(--space-2));
+  left: calc(var(--map-control-size) + var(--space-2));
   display: grid;
   gap: 4px;
   padding: var(--space-1);
@@ -575,22 +580,33 @@ a.tile:focus-visible { outline: .16cqw solid #fff; outline-offset: -.3cqw; }
   right: var(--space-1);
   display: grid;
   justify-items: center;
-  gap: .2cqw;
-  padding: .48cqw .6cqw;
-  border: max(1px, .13cqw) solid #111;
+  gap: .3cqw;
+  padding: .72cqw .9cqw;
+  border: max(1px, .195cqw) solid #111;
   background: #fafbfc;
   color: #111;
   text-align: center;
-  font-size: max(8px, 1.1cqw);
+  font-size: max(12px, 1.65cqw);
   line-height: 1;
   font-weight: 800;
 }
-.map-speed strong { font-size: max(19px, 3.35cqw); }
+.map-speed strong { font-size: max(28.5px, 5.025cqw); }
 .map-voice {
   position: absolute;
   z-index: 3;
   bottom: calc(18.55% + 4px);
   right: calc(19.85% + 4px);
+}
+@container (max-width: 720px) {
+  .map-tools { grid-auto-flow: column; }
+  .map-menu-toggle { margin-bottom: 0; margin-right: var(--space-1); }
+  .map-menu {
+    top: calc(var(--map-control-size) + var(--space-2));
+    left: var(--space-1);
+  }
+}
+@container (max-width: 360px) {
+  .map-speed { top: calc(var(--map-control-size) + var(--space-2)); }
 }
 @media (prefers-reduced-motion: reduce) {
   .map-camera, .map-plane { transition: none; }
