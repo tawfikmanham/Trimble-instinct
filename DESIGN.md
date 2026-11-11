@@ -26,3 +26,10 @@
 - Use Roboto with Arial and sans-serif fallbacks. Size dashboard labels relative to the frame so they scale for landscape previews.
 - Give the primary reading or instruction the largest type. Use bold uppercase for sidebar labels and units. Keep explanatory text and secondary readings subordinate to the primary reading.
 - Use vector icons on transparent backgrounds. Keep yellow for active states, notifications, and turn guidance.
+
+## Motion
+
+- Keep frequently repeated feedback short. The audio button compresses slightly on press and morphs between play and pause in 150 ms with ease-in-out.
+- Keep timer digits in fixed-width cells. Roll only the digits that change, using the same direction and timing on each tick. Reset the timer immediately on replay.
+- Respect reduced motion by updating icons and digits immediately.
+- References [Emil Kowalski’s animation tips](https://emilkowal.ski/ui/7-practical-animation-tips) and [guidance on easing and duration](https://emilkowal.ski/ui/agents-with-taste).

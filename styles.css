@@ -305,6 +305,17 @@ a.tile:focus-visible { outline: .16cqw solid #fff; outline-offset: -.3cqw; }
   font-size: 1.25cqw;
   font-variant-numeric: tabular-nums;
 }
+#audio-elapsed { display: inline-flex; line-height: 1.2; }
+.audio-digit {
+  position: relative;
+  display: inline-block;
+  width: 1ch;
+  height: 1lh;
+  overflow: hidden;
+  text-align: center;
+}
+.audio-digit-outgoing { position: absolute; inset: 0; }
+.audio-digit > span { display: block; }
 .audio-track {
   height: max(2px, 1.25cqw);
   background: #fafbfc;
@@ -326,11 +337,31 @@ a.tile:focus-visible { outline: .16cqw solid #fff; outline-offset: -.3cqw; }
   border: 0;
   padding: 0;
   cursor: pointer;
+  transition: transform 120ms ease-out;
 }
-.audio-play svg { width: 3.55cqw; color: #d9d9d9; }
+.audio-play:active { transform: scale(.96); }
 .audio-play:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
-.audio-pause-icon, .audio-play.is-playing .audio-play-icon { display: none; }
-.audio-play.is-playing .audio-pause-icon { display: inline; }
+.audio-glyph {
+  position: relative;
+  width: 3.55cqw;
+  aspect-ratio: 1;
+}
+.audio-glyph::before, .audio-glyph::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #d9d9d9;
+  transition: clip-path 150ms cubic-bezier(.65, 0, .35, 1);
+}
+.audio-glyph::before { clip-path: polygon(27% 15%, 55% 32%, 55% 68%, 27% 85%); }
+.audio-glyph::after { clip-path: polygon(54% 31.4%, 84% 50%, 84% 50%, 54% 68.6%); }
+.audio-play.is-playing .audio-glyph::before { clip-path: polygon(25% 17%, 42% 17%, 42% 83%, 25% 83%); }
+.audio-play.is-playing .audio-glyph::after { clip-path: polygon(58% 17%, 75% 17%, 75% 83%, 58% 83%); }
+
+@media (prefers-reduced-motion: reduce) {
+  .audio-play, .audio-glyph::before, .audio-glyph::after { transition: none; }
+  .audio-play:active { transform: none; }
+}
 
 .hos-screen {
   container-type: size;

@@ -14,10 +14,48 @@ const audioDuration = 200;
 let elapsed = 0;
 let startedAt;
 let playbackTimer;
+let displayedTime = '0:00';
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+const timerDigits = Array.from(displayedTime, (character) => {
+  const cell = document.createElement('span');
+  cell.textContent = character;
+  cell.setAttribute('aria-hidden', 'true');
+  if (character !== ':') cell.className = 'audio-digit';
+  return cell;
+});
+audioElapsed.replaceChildren(...timerDigits);
+
+function renderAudioTime(time) {
+  if (time === displayedTime) return;
+
+  for (const [index, cell] of timerDigits.entries()) {
+    const previous = displayedTime[index];
+    const next = time[index];
+    if (previous === next) continue;
+    if (reducedMotion.matches || time === '0:00') {
+      cell.textContent = next;
+      continue;
+    }
+
+    const outgoing = document.createElement('span');
+    outgoing.className = 'audio-digit-outgoing';
+    outgoing.textContent = previous;
+    const incoming = document.createElement('span');
+    incoming.textContent = next;
+    cell.replaceChildren(outgoing, incoming);
+
+    const timing = { duration: 150, easing: 'cubic-bezier(.65, 0, .35, 1)' };
+    outgoing.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(-100%)' }], timing)
+      .addEventListener('finish', () => outgoing.remove(), { once: true });
+    incoming.animate([{ transform: 'translateY(100%)' }, { transform: 'translateY(0)' }], timing);
+  }
+  displayedTime = time;
+  audioElapsed.setAttribute('aria-label', `${time} elapsed`);
+}
 
 function renderAudio() {
   const seconds = Math.floor(elapsed);
-  audioElapsed.textContent = `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`;
+  renderAudioTime(`${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`);
   audioTrack.style.setProperty('--audio-progress', `${elapsed / audioDuration * 100}%`);
   const playing = playbackTimer !== undefined;
   audioButton.classList.toggle('is-playing', playing);
@@ -42,7 +80,7 @@ audioButton.addEventListener('click', () => {
   } else {
     if (elapsed === audioDuration) elapsed = 0;
     startedAt = performance.now() - elapsed * 1000;
-    playbackTimer = setInterval(updateAudioProgress, 250);
+    playbackTimer = setInterval(updateAudioProgress, 100);
     renderAudio();
   }
 });
