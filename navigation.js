@@ -7,6 +7,45 @@ const dutyLabel = document.querySelector('#duty-label');
 const dutyDialog = document.querySelector('#duty-dialog');
 const dutyOptions = [...dutyDialog.querySelectorAll('[data-duty]')];
 let selectedDuty;
+const audioButton = document.querySelector('.audio-play');
+const audioElapsed = document.querySelector('#audio-elapsed');
+const audioTrack = document.querySelector('.audio-track');
+const audioDuration = 200;
+let elapsed = 0;
+let startedAt;
+let playbackTimer;
+
+function renderAudio() {
+  const seconds = Math.floor(elapsed);
+  audioElapsed.textContent = `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`;
+  audioTrack.style.setProperty('--audio-progress', `${elapsed / audioDuration * 100}%`);
+  const playing = playbackTimer !== undefined;
+  audioButton.classList.toggle('is-playing', playing);
+  audioButton.setAttribute('aria-label', playing ? 'Pause audio' : 'Play audio');
+}
+
+function stopAudio() {
+  clearInterval(playbackTimer);
+  playbackTimer = undefined;
+}
+
+function updateAudioProgress() {
+  elapsed = Math.min(audioDuration, (performance.now() - startedAt) / 1000);
+  if (elapsed === audioDuration) stopAudio();
+  renderAudio();
+}
+
+audioButton.addEventListener('click', () => {
+  if (playbackTimer !== undefined) {
+    stopAudio();
+    updateAudioProgress();
+  } else {
+    if (elapsed === audioDuration) elapsed = 0;
+    startedAt = performance.now() - elapsed * 1000;
+    playbackTimer = setInterval(updateAudioProgress, 250);
+    renderAudio();
+  }
+});
 
 function showCurrentScreen() {
   const activeHash = screenLinks.find((link) => link.hash === location.hash)?.hash;

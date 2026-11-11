@@ -312,7 +312,7 @@ a.tile:focus-visible { outline: .16cqw solid #fff; outline-offset: -.3cqw; }
 .audio-track::before {
   content: "";
   display: block;
-  width: 68.6%;
+  width: var(--audio-progress, 0%);
   height: 100%;
   background: #207aaf;
 }
@@ -323,8 +323,14 @@ a.tile:focus-visible { outline: .16cqw solid #fff; outline-offset: -.3cqw; }
   aspect-ratio: 1;
   border-radius: 50%;
   background: #056295;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
 }
 .audio-play svg { width: 3.55cqw; color: #d9d9d9; }
+.audio-play:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.audio-pause-icon, .audio-play.is-playing .audio-play-icon { display: none; }
+.audio-play.is-playing .audio-pause-icon { display: inline; }
 
 .hos-screen {
   container-type: size;
