@@ -41,7 +41,10 @@ body {
 .vehicle img { width: 4cqw; }
 .vehicle strong { font-weight: 900; }
 .driver { gap: 1.9cqw; transform: translateY(-.36cqw); }
-.region { width: 5.36cqw; }
+.region {
+  width: 5.36cqw;
+  clip-path: circle(46% at center);
+}
 .alerts { width: 3.75cqw; }
 .duty {
   width: 28.07cqw;
