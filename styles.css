@@ -99,8 +99,7 @@ body {
   max-width: calc(100% - 32px);
   max-height: calc(100dvh - 32px);
   padding: 0;
-  border: 1px solid #484953;
-  border-radius: var(--space-1);
+  border: 0;
   background: #242432;
   color: inherit;
   box-shadow: 0 8px 32px #0008;
