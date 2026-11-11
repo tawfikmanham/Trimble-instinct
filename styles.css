@@ -57,9 +57,13 @@ body {
 .vehicle { gap: 1.83cqw; font-size: 2.5cqw; letter-spacing: .08cqw; }
 .vehicle-icon { --icon-size: 4cqw; color: #aeb4b6; }
 .vehicle strong { font-weight: 900; }
-.driver { gap: 1.9cqw; transform: translateY(-.36cqw); }
+.driver {
+  --header-icon-size: 3.6cqw;
+  gap: 1.9cqw;
+  transform: translateY(-.36cqw);
+}
 .region {
-  width: 5.36cqw;
+  width: var(--header-icon-size);
   clip-path: circle(46% at center);
 }
 .alerts {
@@ -70,8 +74,9 @@ body {
 .alerts-bell {
   position: absolute;
   left: -.45cqw;
-  bottom: .02cqw;
-  --icon-size: 3.6cqw;
+  top: 50%;
+  transform: translateY(-50%);
+  --icon-size: var(--header-icon-size);
   --icon-fill: 1;
   color: #92949d;
 }
