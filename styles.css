@@ -465,9 +465,20 @@ a.tile:focus-visible { outline: .16cqw solid #fff; outline-offset: -.3cqw; }
   border: 0;
   background: var(--hos-track);
 }
-.hos-reading meter::-webkit-meter-bar { border: 0; border-radius: 0; background: var(--hos-track); }
-.hos-reading meter::-webkit-meter-optimum-value { border-radius: 0; background: var(--hos-fill); }
-.hos-reading meter::-moz-meter-bar { background: var(--hos-fill); }
+.hos-reading meter::-webkit-meter-inner-element { height: 100%; }
+.hos-reading meter::-webkit-meter-bar {
+  height: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: var(--hos-track);
+}
+.hos-reading meter::-webkit-meter-optimum-value {
+  height: 100%;
+  border-radius: 0;
+  background: var(--hos-fill);
+}
+.hos-reading meter::-moz-meter-bar { height: 100%; background: var(--hos-fill); }
 .hos-break { --hos-fill: #dd2028; --hos-track: #f9d4d5; }
 .hos-driving { --hos-fill: #f6aa26; --hos-track: #fcf3e2; }
 .hos-duty { --hos-fill: #329840; --hos-track: #deeacf; }
