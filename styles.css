@@ -189,14 +189,12 @@ body {
 .duty-option.personal { background: #43494f; }
 .duty-option.off { background: #ab2026; }
 .profile {
-  display: grid;
-  place-items: center;
+  display: block;
+  flex: none;
   width: 5.05cqw;
   aspect-ratio: 1;
-  background: #009fd2;
+  object-fit: cover;
   border-radius: 50%;
-  font-size: 2.52cqw;
-  font-weight: 700;
   margin-left: .2cqw;
 }
 
