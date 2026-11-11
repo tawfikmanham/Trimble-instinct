@@ -4,28 +4,26 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#22252e">
-  <title>Navigation prototype · Baseline</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&amp;icon_names=add,bed,close,directions_car,expand_more,explore,flag,map,menu,navigation,notifications,pause,play_arrow,remove,replay,search_hands_free,star,timelapse,timer,turn_left,turn_right,volume_off,volume_up&amp;display=block">
+  <title>Driver dashboard · Compact layout</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&amp;icon_names=add,bed,close,directions_car,expand_more,explore,flag,home,map,menu,navigation,pause,play_arrow,remove,replay,timelapse,turn_left,turn_right,volume_off,volume_up&amp;display=block">
   <link rel="stylesheet" href="styles.css">
   <script src="navigation.js" defer></script>
 </head>
 <body>
   <main class="dashboard" aria-label="Driver navigation prototype">
     <header class="status-bar">
-      <div class="vehicle"><span class="material-symbol vehicle-icon" aria-hidden="true">search_hands_free</span> <strong>STOPPED</strong></div>
-      <div class="driver">
-        <img class="region" src="assets/us-flag.svg" alt="United States">
-        <div class="alerts">
-          <span class="material-symbol alerts-bell" aria-hidden="true">notifications</span>
-          <span class="alerts-count" data-screen="navigation" aria-label="4 notifications" role="img">4</span>
-          <span class="alerts-count" data-screen="summary hos" aria-label="2 notifications" role="img" hidden>2</span>
-        </div>
-        <button class="duty" type="button" aria-haspopup="dialog" aria-controls="duty-dialog" aria-expanded="false">
-          <span class="material-symbol duty-timer" aria-hidden="true">timer</span>
-          <strong id="duty-label">ON</strong>
-          <span class="material-symbol chevron" aria-hidden="true">expand_more</span>
+      <a class="drive-time" href="#hos" aria-label="Driving time left, 3 hours 27 minutes. View hours of service.">
+        <strong>03:27</strong><span>Driving Time Left</span>
+      </a>
+      <div class="driver-actions">
+        <span class="incident-feedback" role="status"></span>
+        <button class="incident-record" type="button" aria-label="Start simulated incident recording">
+          <span class="record-mark" aria-hidden="true"></span>
         </button>
-        <img class="profile" src="assets/driver-avatar.jpg" alt="Driver profile">
+        <button class="duty" type="button" aria-label="Driver profile. Duty status ON." aria-haspopup="dialog" aria-controls="duty-dialog" aria-expanded="false">
+          <img class="profile" src="assets/driver-avatar.jpg" alt="">
+          <strong id="duty-label" data-status="on" aria-hidden="true">ON</strong>
+        </button>
       </div>
     </header>
     <dialog id="duty-dialog" class="duty-dialog" aria-labelledby="duty-title">
@@ -47,21 +45,21 @@
       </div>
     </dialog>
     <div class="workspace">
-      <nav class="sections" aria-label="App sections" tabindex="0">
-        <a class="tile" href="#summary">
-          <span class="material-symbol" aria-hidden="true">star</span>
-          <span>SUMMARY</span>
+      <nav class="sections" aria-label="App sections">
+        <a class="tile" href="#home" aria-current="page">
+          <span class="material-symbol" aria-hidden="true">home</span>
+          <span>Home</span>
         </a>
         <a class="tile" href="#hos">
           <span class="material-symbol" aria-hidden="true">timelapse</span>
           <span>HOS</span>
         </a>
-        <a class="tile" href="#navigation" aria-current="page">
+        <a class="tile" href="#navigation">
           <span class="material-symbol" aria-hidden="true">navigation</span>
-          <span>NAVIGATION</span>
+          <span>Navigation</span>
         </a>
       </nav>
-      <section id="summary" class="summary-screen" data-screen="summary" aria-label="Summary" hidden>
+      <section id="home" class="summary-screen" data-screen="home" aria-label="Home">
         <div class="fuel-card">
           <button class="fuel-gauge" type="button" aria-label="13.5 MPG, average 11.8 MPG. Cycle sample reading.">
             <span class="fuel-ring" aria-hidden="true"></span>
@@ -107,10 +105,10 @@
             </div>
             <div class="hos-reading hos-driving">
               <dt>Driving / 11h</dt>
-              <dd><strong>01:23</strong>
-                <svg class="hos-meter" viewBox="0 0 660 1" preserveAspectRatio="none" role="meter" aria-valuemin="0" aria-valuemax="660" aria-valuenow="83" aria-label="Driving time remaining, 1 hour 23 minutes out of 11 hours">
+              <dd><strong>03:27</strong>
+                <svg class="hos-meter" viewBox="0 0 660 1" preserveAspectRatio="none" role="meter" aria-valuemin="0" aria-valuemax="660" aria-valuenow="207" aria-label="Driving time remaining, 3 hours 27 minutes out of 11 hours">
                   <rect class="hos-meter-track" width="660" height="1"/>
-                  <rect class="hos-meter-fill" width="83" height="1"/>
+                  <rect class="hos-meter-fill" width="207" height="1"/>
                 </svg>
               </dd>
             </div>
@@ -127,7 +125,7 @@
           <p class="hos-distance">Distance driven today <strong>132 mi</strong></p>
         </div>
       </section>
-      <section id="navigation" class="navigation" data-screen="navigation" aria-label="Current route">
+      <section id="navigation" class="navigation" data-screen="navigation" aria-label="Current route" hidden>
         <div class="map-viewport" data-view="guidance" role="img" aria-label="Tilted guidance view of the simulated route">
           <div class="map-camera">
             <svg class="map-plane" viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">

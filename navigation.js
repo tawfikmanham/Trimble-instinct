@@ -127,6 +127,24 @@ const dutyTrigger = document.querySelector('.duty');
 const dutyLabel = document.querySelector('#duty-label');
 const dutyDialog = document.querySelector('#duty-dialog');
 const dutyOptions = [...dutyDialog.querySelectorAll('[data-duty]')];
+const dutyBadges = {
+  'ON(D)': ['D', 'driving'],
+  ON: ['ON', 'on'],
+  SB: ['SB', 'sleeper'],
+  'ON(YM)': ['YM', 'yard'],
+  'OFF(PC)': ['PC', 'personal'],
+  OFF: ['OFF', 'off'],
+};
+const incidentRecord = document.querySelector('.incident-record');
+const incidentFeedback = document.querySelector('.incident-feedback');
+
+incidentRecord.addEventListener('click', () => {
+  const recording = incidentRecord.classList.toggle('is-recording');
+  incidentRecord.setAttribute('aria-label', recording
+    ? 'Stop simulated incident recording'
+    : 'Start simulated incident recording');
+  incidentFeedback.textContent = recording ? 'Recording demo' : '';
+});
 const fuelGauge = document.querySelector('.fuel-gauge');
 const fuelReading = fuelGauge.querySelector('.fuel-reading');
 const fuelSamples = [13.5, 6.2, 9.8, 15];
@@ -154,7 +172,6 @@ const driveButton = document.querySelector('.map-demo');
 const route = document.querySelector('#demo-route');
 const mapPlane = document.querySelector('.map-plane');
 const mapPosition = document.querySelector('.map-position');
-const vehicleStatus = document.querySelector('.vehicle strong');
 const turnArrow = document.querySelector('.next-turn .material-symbol');
 const turnDistance = document.querySelector('.turn-distance');
 const thenTurn = document.querySelector('.then-turn');
@@ -249,7 +266,6 @@ function setDriveButton(icon, label) {
 function stopDrive() {
   cancelAnimationFrame(driveFrame);
   driveFrame = undefined;
-  setText(vehicleStatus, 'STOPPED');
   if (driveTime >= driveDuration) setDriveButton('replay', 'Replay drive');
   else setDriveButton('play_arrow', 'Resume drive');
 }
@@ -271,7 +287,6 @@ driveButton.addEventListener('click', () => {
     resetMapPosition();
   }
   driveStartedAt = performance.now() - driveTime * 1000;
-  setText(vehicleStatus, 'DRIVING');
   setDriveButton('pause', 'Pause drive');
   renderDrive();
   driveFrame = requestAnimationFrame(advanceDrive);
@@ -346,8 +361,9 @@ audioButton.addEventListener('click', () => {
 });
 
 function showCurrentScreen() {
-  const activeHash = screenLinks.find((link) => link.hash === location.hash)?.hash;
-  const currentScreen = activeHash?.slice(1) ?? 'navigation';
+  const requestedHash = location.hash === '#summary' ? '#home' : location.hash;
+  const activeHash = screenLinks.find((link) => link.hash === requestedHash)?.hash;
+  const currentScreen = activeHash?.slice(1) ?? 'home';
   if (currentScreen !== 'navigation' && driveFrame !== undefined) stopDrive();
 
   for (const element of screenElements) {
@@ -378,7 +394,10 @@ for (const option of dutyOptions) {
     for (const candidate of dutyOptions) {
       candidate.setAttribute('aria-pressed', String(candidate === option));
     }
-    dutyLabel.textContent = option.querySelector('.duty-option-label').textContent;
+    const [badge, tone] = dutyBadges[option.dataset.duty];
+    dutyLabel.textContent = badge;
+    dutyLabel.dataset.status = tone;
+    dutyTrigger.setAttribute('aria-label', `Driver profile. Duty status ${option.querySelector('.duty-option-label').textContent}.`);
     dutyDialog.close();
   });
 }
