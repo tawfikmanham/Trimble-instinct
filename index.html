@@ -189,8 +189,10 @@
             <button type="button" data-map-view="guidance" aria-pressed="true">Tilted guidance</button>
             <button type="button" class="map-reset">Reset map position</button>
           </div>
-          <div class="map-speed" role="img" aria-label="Speed limit 35 miles per hour"><span>SPEED<br>LIMIT</span><strong>35</strong></div>
-          <button class="map-control map-voice" type="button" aria-label="Mute voice guidance" aria-pressed="false"><span class="material-symbol" aria-hidden="true">volume_up</span></button>
+          <div class="map-indicators">
+            <div class="map-speed" role="img" aria-label="Speed limit 35 miles per hour"><span>SPEED<br>LIMIT</span><strong>35</strong></div>
+            <button class="map-control map-voice" type="button" aria-label="Mute voice guidance" aria-pressed="false"><span class="material-symbol" aria-hidden="true">volume_up</span></button>
+          </div>
           <button class="map-demo" type="button"><span class="material-symbol" aria-hidden="true">play_arrow</span><span>Play drive</span></button>
         </div>
         <div class="guidance">
@@ -214,12 +216,12 @@
           <ol>
             <li>
               <span class="material-symbol" aria-hidden="true">turn_left</span>
-              <div><strong>Turn left</strong><span>Xerxes Avenue South</span></div>
+              <div><strong>Turn left</strong><span class="preview-street">Xerxes Avenue South</span></div>
               <span class="distance">350 ft</span>
             </li>
             <li>
               <span class="material-symbol" aria-hidden="true">turn_right</span>
-              <div><strong>Turn right</strong><span>After the left turn</span></div>
+              <div><strong>Turn right</strong><span class="preview-street">After the left turn</span></div>
               <span class="distance">50 ft</span>
             </li>
           </ol>

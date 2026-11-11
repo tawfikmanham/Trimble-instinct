@@ -168,7 +168,7 @@ const upcoming = [...preview.querySelectorAll('li')].map((item) => ({
   item,
   icon: item.querySelector('.material-symbol'),
   title: item.querySelector('strong'),
-  street: item.querySelector('div span'),
+  street: item.querySelector('.preview-street'),
   distance: item.querySelector('.distance'),
 }));
 const firstTurn = 223 + Math.hypot(117, 30);

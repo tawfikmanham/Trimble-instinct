@@ -583,11 +583,16 @@ a.tile:focus-visible { outline: .16cqw solid #fff; outline-offset: -.3cqw; }
 }
 .map-menu button[aria-pressed="true"] { box-shadow: inset 2px 0 #ffce00; }
 .map-menu button:disabled { color: #aeb4b6; cursor: default; }
-.map-speed {
+.map-indicators {
   position: absolute;
   z-index: 3;
   top: var(--space-1);
   right: var(--space-1);
+  display: grid;
+  justify-items: end;
+  gap: var(--space-1);
+}
+.map-speed {
   display: grid;
   justify-items: center;
   gap: .3cqw;
@@ -601,12 +606,6 @@ a.tile:focus-visible { outline: .16cqw solid #fff; outline-offset: -.3cqw; }
   font-weight: 800;
 }
 .map-speed strong { font-size: max(28.5px, 5.025cqw); }
-.map-voice {
-  position: absolute;
-  z-index: 3;
-  bottom: calc(18.55% + 4px);
-  right: calc(19.85% + 4px);
-}
 .map-demo {
   position: absolute;
   z-index: 4;
@@ -637,7 +636,7 @@ a.tile:focus-visible { outline: .16cqw solid #fff; outline-offset: -.3cqw; }
   }
 }
 @container (max-width: 360px) {
-  .map-speed { top: calc(var(--map-control-size) + var(--space-2)); }
+  .map-indicators { top: calc(var(--map-control-size) + var(--space-2)); }
 }
 @media (prefers-reduced-motion: reduce) {
   .map-camera, .map-plane { transition: none; }
@@ -760,6 +759,9 @@ a.tile:focus-visible { outline: .16cqw solid #fff; outline-offset: -.3cqw; }
   opacity: 0;
   transform: translateY(1cqw);
   transition: opacity 180ms ease, transform 180ms ease, visibility 180ms;
+}
+@container (max-width: 720px) {
+  .turn-preview { right: max(19.85%, 108px); }
 }
 .turn-preview.is-open { opacity: 1; visibility: visible; transform: none; }
 .turn-preview h1 { margin: 0 0 .75cqw; font-size: 1.65cqw; }
