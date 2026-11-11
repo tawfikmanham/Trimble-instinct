@@ -508,7 +508,7 @@ a.tile:focus-visible { outline: .16cqw solid #fff; outline-offset: -.3cqw; }
   transition: transform 240ms cubic-bezier(.65, 0, .35, 1);
 }
 .map-viewport[data-view="guidance"] .map-plane {
-  transform: perspective(65cqw) rotateX(36deg) scale(1.32) translateY(5%) rotate(var(--map-bearing, 0deg));
+  transform: translateY(5%) scale(1.32, 1.15) skewX(-8deg) rotate(var(--map-bearing, 0deg));
 }
 .map-viewport[data-following="true"] .map-plane { transition: none; }
 .map-road-labels { fill: #d6d8cf; font-size: 14px; }
@@ -523,6 +523,13 @@ a.tile:focus-visible { outline: .16cqw solid #fff; outline-offset: -.3cqw; }
   stroke-linejoin: round;
 }
 .map-viewport[data-view="guidance"] .map-endpoints { visibility: hidden; }
+.map-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+.map-overlay button { pointer-events: auto; }
 .map-tools {
   position: absolute;
   z-index: 4;
