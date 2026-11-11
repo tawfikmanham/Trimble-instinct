@@ -208,10 +208,13 @@ function renderDrive() {
 
   const followingVehicle = mapViewport.dataset.view === 'guidance';
   mapViewport.dataset.following = String(followingVehicle);
+  const start = route.getPointAtLength(driveStart);
+  const cameraX = start.x + (point.x - start.x) * .82;
+  const cameraY = start.y + (point.y - start.y) * .82;
   mapPlane.setAttribute('viewBox', followingVehicle
-    ? `${point.x - 266.6} ${point.y - 186} 620 310`
+    ? `${cameraX - 318.2} ${cameraY - 222} 740 370`
     : '0 0 1000 500');
-  mapViewport.style.setProperty('--map-bearing', followingVehicle && !reducedMotion.matches ? `${-bearing}deg` : '0deg');
+  mapViewport.style.setProperty('--map-bearing', followingVehicle && !reducedMotion.matches ? `${-bearing * .65}deg` : '0deg');
 
   const feet = Math.ceil(next.feet * (1 - progress) / 10) * 10;
   setText(turnArrow, next.icon);
