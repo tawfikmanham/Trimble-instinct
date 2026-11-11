@@ -488,8 +488,10 @@ a.tile:focus-visible { outline: .16cqw solid #fff; outline-offset: -.3cqw; }
 .map-viewport {
   position: absolute;
   inset: 0;
+  z-index: 0;
   height: 81.45%;
   overflow: hidden;
+  contain: paint;
   touch-action: none;
   background: #252c28;
 }
@@ -576,6 +578,7 @@ a.tile:focus-visible { outline: .16cqw solid #fff; outline-offset: -.3cqw; }
 .map-menu button:disabled { color: #aeb4b6; cursor: default; }
 .map-speed {
   position: absolute;
+  z-index: 3;
   top: var(--space-1);
   right: var(--space-1);
   display: grid;
