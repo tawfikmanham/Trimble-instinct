@@ -14,8 +14,13 @@
       <div class="vehicle"><img src="assets/wheel.png" alt=""> <strong>STOPPED</strong></div>
       <div class="driver">
         <img class="region" src="assets/region.png" alt="United States">
-        <img class="alerts" data-screen="navigation" src="assets/alerts.png" alt="4 notifications">
-        <img class="alerts" data-screen="summary" src="assets/summary-alerts.png" alt="2 notifications" hidden>
+        <div class="alerts">
+          <svg class="alerts-bell" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M12 22a2 2 0 0 0 2-2h-4a2 2 0 0 0 2 2Zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4a1.5 1.5 0 0 0-3 0v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2Z"/>
+          </svg>
+          <span class="alerts-count" data-screen="navigation" aria-label="4 notifications" role="img">4</span>
+          <span class="alerts-count" data-screen="summary" aria-label="2 notifications" role="img" hidden>2</span>
+        </div>
         <div class="duty"><img src="assets/duty.png" alt=""><strong data-screen="navigation">ON(YM)</strong><strong data-screen="summary" hidden>ON(D)</strong><span class="chevron" aria-hidden="true"></span></div>
         <div class="profile" aria-label="TM profile">TM</div>
       </div>
