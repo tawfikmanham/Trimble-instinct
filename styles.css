@@ -536,7 +536,7 @@ a.tile:focus-visible { outline: .16cqw solid #fff; outline-offset: -.3cqw; }
   aspect-ratio: 1;
   padding: 0;
   border: 0;
-  background: #fafbfce0;
+  background: #fafbfcc7;
   color: #22252e;
   cursor: pointer;
 }
