@@ -15,8 +15,8 @@ body {
 }
 
 .dashboard {
-  width: min(100vw, 181.68dvh);
-  aspect-ratio: 2558 / 1408;
+  width: min(100%, calc(100dvh * 16 / 9));
+  aspect-ratio: 16 / 9;
   container-type: inline-size;
   display: grid;
   grid-template-rows: 18.47% 81.53%;
