@@ -278,7 +278,12 @@ a.tile:focus-visible { outline: .16cqw solid #fff; outline-offset: -.3cqw; }
   line-height: 1;
 }
 .fuel-gauge:focus-visible { outline: 2px solid #fff; outline-offset: 8px; }
-.fuel-ring {
+@property --fuel-sweep {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 90%;
+}
+.fuel-ring, .fuel-marker {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -286,17 +291,19 @@ a.tile:focus-visible { outline: .16cqw solid #fff; outline-offset: -.3cqw; }
   overflow: visible;
   pointer-events: none;
 }
-.fuel-ring-track, .fuel-ring-fill { fill: none; stroke-width: 12.5; }
-.fuel-ring-track { stroke: #4a4d59; }
-.fuel-ring-fill {
-  stroke: url(#fuel-gradient);
-  stroke-dasharray: var(--fuel-progress, 90) 100;
-  transform: rotate(180deg);
-  transform-origin: center;
-  transition: stroke-dasharray 230ms cubic-bezier(.65, 0, .35, 1);
+.fuel-ring {
+  --fuel-sweep: calc(var(--fuel-progress, 90) * 1%);
+  border-radius: 50%;
+  background: conic-gradient(from 270deg,
+    #df8716,
+    #ffc15a calc(var(--fuel-sweep) * .5),
+    #fff0c5 var(--fuel-sweep),
+    #4a4d59 var(--fuel-sweep));
+  mask-image: radial-gradient(circle closest-side, transparent 74.6%, #000 75.4%, #000 99.2%, transparent);
+  transition: --fuel-sweep 230ms cubic-bezier(.65, 0, .35, 1);
 }
 @media (prefers-reduced-motion: reduce) {
-  .fuel-ring-fill { transition: none; }
+  .fuel-ring { transition: none; }
 }
 .fuel-average { font-size: min(1.7cqw, 4.15cqh); margin-bottom: var(--space-1); }
 .fuel-average strong { font-size: min(2.3cqw, 5.65cqh); }
