@@ -212,28 +212,49 @@ a.tile:focus-visible { outline: .16cqw solid #fff; outline-offset: -.3cqw; }
 .audio-card {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  align-items: center;
+  align-items: start;
+  gap: var(--space-2);
+  border-radius: var(--space-1);
+}
+.audio-details {
+  display: grid;
+  align-self: stretch;
+  align-content: space-between;
   gap: var(--space-1);
 }
 .audio-label {
-  display: grid;
-  align-content: center;
-  gap: var(--space-1);
-  font-size: 1.6cqw;
+  margin: 0;
+  font-size: 1.9cqw;
+  font-weight: 700;
+  line-height: 1.15;
 }
-.audio-label::after {
+.audio-times {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-1);
+  font-size: 1.25cqw;
+  font-variant-numeric: tabular-nums;
+}
+.audio-track {
+  height: max(2px, 1.25cqw);
+  background: #fafbfc;
+}
+.audio-track::before {
   content: "";
-  border-bottom: .21cqw solid #777984;
+  display: block;
+  width: 68.6%;
+  height: 100%;
+  background: #207aaf;
 }
 .audio-play {
   display: grid;
   place-items: center;
-  width: 6.8cqw;
+  width: 5.6cqw;
   aspect-ratio: 1;
   border-radius: 50%;
   background: #056295;
 }
-.audio-play svg { width: 4.15cqw; }
+.audio-play svg { width: 3.55cqw; color: #d9d9d9; }
 
 .navigation {
   position: relative;
