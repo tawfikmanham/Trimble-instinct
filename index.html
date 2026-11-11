@@ -21,15 +21,39 @@
           <span class="alerts-count" data-screen="navigation" aria-label="4 notifications" role="img">4</span>
           <span class="alerts-count" data-screen="summary" aria-label="2 notifications" role="img" hidden>2</span>
         </div>
-        <div class="duty"><img src="assets/duty.png" alt=""><strong data-screen="navigation">ON(YM)</strong><strong data-screen="summary" hidden>ON(D)</strong><span class="chevron" aria-hidden="true"></span></div>
+        <div class="duty">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" aria-hidden="true">
+            <circle cx="12" cy="14" r="8"/>
+            <path d="M12 14v-4M9.5 2h5m3.2 5 1.5-1.5"/>
+          </svg>
+          <strong data-screen="navigation">ON(YM)</strong>
+          <strong data-screen="summary" hidden>ON(D)</strong>
+          <span class="chevron" aria-hidden="true"></span>
+        </div>
         <div class="profile" aria-label="TM profile">TM</div>
       </div>
     </header>
     <div class="workspace">
       <nav class="sections" aria-label="App sections" tabindex="0">
-        <a class="tile" href="#summary"><img src="assets/summary.png" alt=""><span>SUMMARY</span></a>
-        <div class="tile"><img src="assets/hos.png" alt="">HOS</div>
-        <a class="tile" href="#navigation" aria-current="page"><img src="assets/navigation.png" alt=""><span>NAVIGATION</span></a>
+        <a class="tile" href="#summary">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="m12 2.2 2.95 6 6.62.96-4.79 4.67 1.13 6.6L12 17.31l-5.91 3.12 1.13-6.6-4.79-4.67 6.62-.96Z"/>
+          </svg>
+          <span>SUMMARY</span>
+        </a>
+        <div class="tile">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/>
+            <path fill="currentColor" d="M12 5.4a6.6 6.6 0 1 1-4.67 11.27L12 12Z"/>
+          </svg>
+          HOS
+        </div>
+        <a class="tile" href="#navigation" aria-current="page">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2.5 2.7 21.4l9.3-3.5 9.3 3.5Z"/>
+          </svg>
+          <span>NAVIGATION</span>
+        </a>
       </nav>
       <section id="summary" class="summary-screen" data-screen="summary" aria-label="Summary" hidden>
         <div class="fuel-card">
@@ -45,7 +69,11 @@
           </div>
           <div class="audio-card">
             <div class="audio-label">Play Audio</div>
-            <img src="assets/summary-play.png" alt="">
+            <div class="audio-play" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M6 4.6c0-.9 1-1.5 1.8-1l13 7.4a1.15 1.15 0 0 1 0 2l-13 7.4c-.8.5-1.8-.1-1.8-1Z"/>
+              </svg>
+            </div>
           </div>
         </div>
       </section>
