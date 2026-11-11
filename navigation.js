@@ -1,5 +1,74 @@
 const toggle = document.querySelector('.preview-toggle');
 const preview = document.querySelector('#turn-preview');
+const mapViewport = document.querySelector('.map-viewport');
+const mapMenu = document.querySelector('#map-menu');
+const mapMenuToggle = document.querySelector('.map-menu-toggle');
+const mapViewToggle = document.querySelector('.map-view-toggle');
+const mapZoomIn = document.querySelector('.map-zoom-in');
+const mapZoomOut = document.querySelector('.map-zoom-out');
+const mapVoice = document.querySelector('.map-voice');
+const mapReset = document.querySelector('.map-reset');
+const mapViewOptions = [...mapMenu.querySelectorAll('[data-map-view]')];
+const mapZoomLevels = [.85, 1, 1.25, 1.55, 1.9, 2.3];
+const defaultMapZoom = 1;
+let mapZoomIndex = defaultMapZoom;
+
+function setMapZoom(index) {
+  mapZoomIndex = Math.max(0, Math.min(mapZoomLevels.length - 1, index));
+  mapViewport.style.setProperty('--map-zoom', mapZoomLevels[mapZoomIndex]);
+  mapZoomIn.disabled = mapZoomIndex === mapZoomLevels.length - 1;
+  mapZoomOut.disabled = mapZoomIndex === 0;
+  mapReset.disabled = mapZoomIndex === defaultMapZoom;
+}
+
+function setMapView(view) {
+  const overview = view === 'overview';
+  mapViewport.dataset.view = view;
+  mapViewport.setAttribute('aria-label', overview
+    ? 'Top-down route overview showing start and destination'
+    : 'Tilted guidance view of the simulated route');
+  mapViewToggle.setAttribute('aria-label', overview ? 'Show tilted guidance' : 'Show route overview');
+  mapViewToggle.firstElementChild.textContent = overview ? 'explore' : 'map';
+  for (const option of mapViewOptions) {
+    option.setAttribute('aria-pressed', String(option.dataset.mapView === view));
+  }
+  setMapZoom(defaultMapZoom);
+}
+
+function setMapMenuOpen(open) {
+  mapMenu.hidden = !open;
+  mapMenuToggle.setAttribute('aria-expanded', String(open));
+}
+
+setMapZoom(defaultMapZoom);
+mapZoomIn.addEventListener('click', () => setMapZoom(mapZoomIndex + 1));
+mapZoomOut.addEventListener('click', () => setMapZoom(mapZoomIndex - 1));
+mapMenuToggle.addEventListener('click', () => setMapMenuOpen(mapMenu.hidden));
+mapViewToggle.addEventListener('click', () => {
+  setMapView(mapViewport.dataset.view === 'guidance' ? 'overview' : 'guidance');
+});
+for (const option of mapViewOptions) {
+  option.addEventListener('click', () => {
+    setMapView(option.dataset.mapView);
+    setMapMenuOpen(false);
+    mapMenuToggle.focus();
+  });
+}
+mapReset.addEventListener('click', () => {
+  setMapZoom(defaultMapZoom);
+  setMapMenuOpen(false);
+  mapMenuToggle.focus();
+});
+mapVoice.addEventListener('click', () => {
+  const muted = mapVoice.getAttribute('aria-pressed') === 'false';
+  mapVoice.setAttribute('aria-pressed', String(muted));
+  mapVoice.firstElementChild.textContent = muted ? 'volume_off' : 'volume_up';
+});
+document.addEventListener('click', (event) => {
+  if (!mapMenu.hidden && !mapMenu.contains(event.target) && !mapMenuToggle.contains(event.target)) {
+    setMapMenuOpen(false);
+  }
+});
 const screenElements = document.querySelectorAll('[data-screen]');
 const screenLinks = [...document.querySelectorAll('.sections a')];
 const dutyTrigger = document.querySelector('.duty');
@@ -158,6 +227,11 @@ toggle.addEventListener('click', () => {
 });
 
 document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && !dutyDialog.open && !mapMenu.hidden) {
+    setMapMenuOpen(false);
+    mapMenuToggle.focus();
+    return;
+  }
   if (event.key === 'Escape' && !dutyDialog.open && !toggle.closest('.navigation').hidden && toggle.getAttribute('aria-expanded') === 'true') {
     setPreviewOpen(false);
     toggle.focus();

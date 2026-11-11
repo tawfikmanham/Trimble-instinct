@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#22252e">
   <title>Navigation prototype · Baseline</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&amp;icon_names=bed,close,directions_car,expand_more,navigation,notifications,pause,star,timelapse,timer,turn_left,turn_right&amp;display=block">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&amp;icon_names=add,bed,close,directions_car,expand_more,explore,map,menu,navigation,notifications,pause,remove,star,timelapse,timer,turn_left,turn_right,volume_off,volume_up&amp;display=block">
   <link rel="stylesheet" href="styles.css">
   <script src="navigation.js" defer></script>
 </head>
@@ -113,7 +113,60 @@
         </div>
       </section>
       <section id="navigation" class="navigation" data-screen="navigation" aria-label="Current route">
-        <img class="map" src="assets/map.png" alt="Simulated navigation map with the highlighted route and a 35 mph speed limit.">
+        <div class="map-viewport" data-view="guidance" role="img" aria-label="Tilted guidance view of the simulated route">
+          <div class="map-camera">
+            <svg class="map-plane" viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <defs>
+                <path id="local-roads" d="M-40 98H350L445 52H1040M-40 162H347L455 108H1040M-40 233H340L451 175H1040M-40 373H326L400 428H1040M-40 460H304L369 511M89-40V540M181-40V540M274-40V540M365-40V63L315 93V220L340 255V395M505-40V253M619-40V245M744-40V540M872-40V540M967-40V540M475 351V540M612 356V540M764 371H1040"/>
+                <path id="main-road" d="M-40 323H333L451 293H715L820 320H1040M417-40V29L450 70V293L416 349V540"/>
+                <path id="demo-route" d="M110 323H333L450 293V175H619V108H792"/>
+              </defs>
+              <rect width="1000" height="500" fill="#252c28"/>
+              <path fill="#29392f" d="M0 0H175V95H0ZM745 176H867V293H745ZM0 378H87V500H0ZM478 433H609V500H478ZM874 374H965V456H874Z"/>
+              <path fill="#1f3b44" d="M702 0H913Q910 19 880 29T803 39Q769 35 738 49L696 49Q670 31 702 0Z"/>
+              <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <use href="#local-roads" stroke="#53564a" stroke-width="9"/>
+                <use href="#local-roads" stroke="#363d35" stroke-width="6"/>
+                <use href="#main-road" stroke="#77756a" stroke-width="21"/>
+                <use href="#main-road" stroke="#4a4e45" stroke-width="17"/>
+                <use href="#demo-route" stroke="#122c49" stroke-width="17"/>
+                <use href="#demo-route" stroke="#3293ee" stroke-width="11"/>
+              </g>
+              <g class="map-road-labels">
+                <text x="205" y="153">W 81st St</text>
+                <text x="795" y="167">W 82nd St</text>
+                <text x="121" y="310">W 84th St</text>
+                <text transform="translate(433 165) rotate(-90)">Xerxes Avenue South</text>
+                <text transform="translate(733 447) rotate(-90)">Penn Avenue</text>
+                <text x="747" y="26" fill="#a1c6d3">Adelmann Pond</text>
+              </g>
+              <g class="map-endpoints">
+                <circle cx="110" cy="323" r="10" fill="#287d39" stroke="#fff" stroke-width="3"/>
+                <text x="110" y="354">Start</text>
+                <circle cx="792" cy="108" r="10" fill="#ab2026" stroke="#fff" stroke-width="3"/>
+                <text x="792" y="88">Destination</text>
+              </g>
+              <g class="map-position" transform="translate(406 304) rotate(76)">
+                <circle r="16" fill="#176bc2" stroke="#fff" stroke-width="3"/>
+                <path d="m0-9 7 15-7-3-7 3Z" fill="#fff"/>
+              </g>
+            </svg>
+          </div>
+        </div>
+        <div class="map-tools" role="group" aria-label="Map controls">
+          <button class="map-control map-menu-toggle" type="button" aria-label="Map menu" aria-expanded="false" aria-controls="map-menu"><span class="material-symbol" aria-hidden="true">menu</span></button>
+          <button class="map-control map-view-toggle" type="button" aria-label="Show route overview"><span class="material-symbol" aria-hidden="true">map</span></button>
+          <button class="map-control map-zoom-in" type="button" aria-label="Zoom in"><span class="material-symbol" aria-hidden="true">add</span></button>
+          <button class="map-control map-zoom-out" type="button" aria-label="Zoom out"><span class="material-symbol" aria-hidden="true">remove</span></button>
+        </div>
+        <div class="map-menu" id="map-menu" hidden>
+          <strong>Map view</strong>
+          <button type="button" data-map-view="overview" aria-pressed="false">Route overview</button>
+          <button type="button" data-map-view="guidance" aria-pressed="true">Tilted guidance</button>
+          <button type="button" class="map-reset">Reset zoom</button>
+        </div>
+        <div class="map-speed" role="img" aria-label="Speed limit 35 miles per hour"><span>SPEED<br>LIMIT</span><strong>35</strong></div>
+        <button class="map-control map-voice" type="button" aria-label="Mute voice guidance" aria-pressed="false"><span class="material-symbol" aria-hidden="true">volume_up</span></button>
         <div class="guidance">
           <div class="next-turn">
             <span class="material-symbol" aria-hidden="true">turn_left</span>
