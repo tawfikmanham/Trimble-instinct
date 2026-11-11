@@ -110,7 +110,7 @@ body {
   letter-spacing: .05cqw;
 }
 .duty-timer { --icon-size: 2.35cqw; }
-.duty strong { font-weight: 900; }
+.duty strong { font-weight: 900; line-height: 1.05; text-wrap: balance; }
 .duty:focus-visible, .duty-close:focus-visible, .duty-option:focus-visible {
   outline: 2px solid #fff;
   outline-offset: -4px;

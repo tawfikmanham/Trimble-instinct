@@ -126,7 +126,6 @@ const dutyTrigger = document.querySelector('.duty');
 const dutyLabel = document.querySelector('#duty-label');
 const dutyDialog = document.querySelector('#duty-dialog');
 const dutyOptions = [...dutyDialog.querySelectorAll('[data-duty]')];
-let selectedDuty;
 const fuelGauge = document.querySelector('.fuel-gauge');
 const fuelReading = fuelGauge.querySelector('.fuel-reading');
 const fuelSamples = [13.5, 6.2, 9.8, 15];
@@ -222,7 +221,6 @@ audioButton.addEventListener('click', () => {
 function showCurrentScreen() {
   const activeHash = screenLinks.find((link) => link.hash === location.hash)?.hash;
   const currentScreen = activeHash?.slice(1) ?? 'navigation';
-  dutyLabel.textContent = selectedDuty ?? (currentScreen === 'navigation' ? 'ON(YM)' : 'ON(D)');
 
   for (const element of screenElements) {
     element.hidden = !element.dataset.screen.split(' ').includes(currentScreen);
@@ -241,10 +239,7 @@ window.addEventListener('hashchange', showCurrentScreen);
 showCurrentScreen();
 
 dutyTrigger.addEventListener('click', () => {
-  const active = dutyOptions.find((option) => option.dataset.duty === dutyLabel.textContent);
-  for (const option of dutyOptions) {
-    option.setAttribute('aria-pressed', String(option === active));
-  }
+  const active = dutyOptions.find((option) => option.getAttribute('aria-pressed') === 'true');
   dutyDialog.showModal();
   dutyTrigger.setAttribute('aria-expanded', 'true');
   active?.focus();
@@ -252,8 +247,10 @@ dutyTrigger.addEventListener('click', () => {
 
 for (const option of dutyOptions) {
   option.addEventListener('click', () => {
-    selectedDuty = option.dataset.duty;
-    dutyLabel.textContent = selectedDuty;
+    for (const candidate of dutyOptions) {
+      candidate.setAttribute('aria-pressed', String(candidate === option));
+    }
+    dutyLabel.textContent = option.querySelector('.duty-option-label').textContent;
     dutyDialog.close();
   });
 }
