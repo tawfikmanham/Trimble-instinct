@@ -45,7 +45,34 @@ body {
   width: 5.36cqw;
   clip-path: circle(46% at center);
 }
-.alerts { width: 3.75cqw; }
+.alerts {
+  position: relative;
+  width: 3.75cqw;
+  height: 4.42cqw;
+}
+.alerts-bell {
+  position: absolute;
+  left: -.45cqw;
+  bottom: .02cqw;
+  width: 3.6cqw;
+  color: #92949d;
+}
+.alerts-count {
+  position: absolute;
+  top: .15cqw;
+  right: .15cqw;
+  display: grid;
+  place-items: center;
+  width: 2.55cqw;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #ffbf00;
+  color: #22252e;
+  font-size: 1.72cqw;
+  font-weight: 700;
+  line-height: 1;
+}
+.alerts-count[hidden] { display: none; }
 .duty {
   width: 28.07cqw;
   height: 5.9cqw;
