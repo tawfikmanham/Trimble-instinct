@@ -6,6 +6,7 @@
 - Keep the prototype in a responsive 16:9 landscape frame. The workspace contains a vertically scrollable sidebar and a content area.
 - On Summary, keep OER and Play Audio in equal-width columns. Size their row to the content and let the MPG panel take the remaining height. Scale the dial within its panel so the three cards fit in the available height.
 - Use the same yellow selection bar across sidebar tiles. Align card edges to the grid and center controls within their cards.
+- Keep sidebar tiles and dashboard cards square-cornered, including the HOS panel and Play Audio card. Use incoming references for content and arrangement while keeping the established dashboard shape and spacing. Circular controls, badges, and gauges retain their functional shapes.
 
 ## Color
 
