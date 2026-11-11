@@ -232,7 +232,7 @@ a.tile:focus-visible { outline: .16cqw solid #fff; outline-offset: -.3cqw; }
   min-width: 0;
   min-height: 0;
 }
-.summary-screen[hidden] { display: none; }
+.summary-screen[hidden], .hos-screen[hidden] { display: none; }
 .fuel-card, .oer-card, .audio-card { background: #333543; }
 .fuel-card {
   container-type: size;
@@ -326,6 +326,74 @@ a.tile:focus-visible { outline: .16cqw solid #fff; outline-offset: -.3cqw; }
   background: #056295;
 }
 .audio-play svg { width: 3.55cqw; color: #d9d9d9; }
+
+.hos-screen {
+  container-type: size;
+  min-width: 0;
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  border-radius: var(--space-1);
+  background: #333543;
+}
+.hos-content {
+  width: 84%;
+  display: grid;
+  gap: min(3.2cqw, 6cqh);
+  text-align: center;
+}
+.hos-content h2 {
+  margin: 0;
+  font-size: min(3.1cqw, 6cqh);
+  font-weight: 400;
+}
+.hos-times {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+}
+.hos-reading {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: start;
+  gap: min(1.15cqw, 2.2cqh);
+  padding: 0 min(1.8cqw, 3.4cqh) min(2.4cqw, 4.5cqh);
+}
+.hos-reading + .hos-reading { border-left: max(1px, .33cqw) solid #575b65; }
+.hos-reading dd {
+  display: grid;
+  gap: min(2.2cqw, 4.3cqh);
+  margin: 0;
+}
+.hos-reading dd strong {
+  font-size: min(7.9cqw, 15cqh);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+.hos-reading dt { font-size: min(3.7cqw, 7cqh); white-space: nowrap; }
+.hos-reading meter {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: min(3cqw, 5.7cqh);
+  border: 0;
+  background: var(--hos-track);
+}
+.hos-reading meter::-webkit-meter-bar { border: 0; border-radius: 0; background: var(--hos-track); }
+.hos-reading meter::-webkit-meter-optimum-value { border-radius: 0; background: var(--hos-fill); }
+.hos-reading meter::-moz-meter-bar { background: var(--hos-fill); }
+.hos-break { --hos-fill: #dd2028; --hos-track: #f9d4d5; }
+.hos-driving { --hos-fill: #f6aa26; --hos-track: #fcf3e2; }
+.hos-duty { --hos-fill: #329840; --hos-track: #deeacf; }
+.hos-distance {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: min(2cqw, 3.8cqh);
+  margin: 0;
+  font-size: min(3.5cqw, 6.65cqh);
+}
+.hos-distance strong { font-size: min(5.6cqw, 10.65cqh); white-space: nowrap; }
 
 .navigation {
   position: relative;

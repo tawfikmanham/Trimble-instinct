@@ -1,7 +1,7 @@
 const toggle = document.querySelector('.preview-toggle');
 const preview = document.querySelector('#turn-preview');
 const screenElements = document.querySelectorAll('[data-screen]');
-const screenLinks = document.querySelectorAll('.sections a');
+const screenLinks = [...document.querySelectorAll('.sections a')];
 const dutyTrigger = document.querySelector('.duty');
 const dutyLabel = document.querySelector('#duty-label');
 const dutyDialog = document.querySelector('#duty-dialog');
@@ -9,11 +9,12 @@ const dutyOptions = [...dutyDialog.querySelectorAll('[data-duty]')];
 let selectedDuty;
 
 function showCurrentScreen() {
-  const currentScreen = location.hash === '#summary' ? 'summary' : 'navigation';
-  dutyLabel.textContent = selectedDuty ?? (currentScreen === 'summary' ? 'ON(D)' : 'ON(YM)');
+  const activeHash = screenLinks.find((link) => link.hash === location.hash)?.hash;
+  const currentScreen = activeHash?.slice(1) ?? 'navigation';
+  dutyLabel.textContent = selectedDuty ?? (currentScreen === 'navigation' ? 'ON(YM)' : 'ON(D)');
 
   for (const element of screenElements) {
-    element.hidden = element.dataset.screen !== currentScreen;
+    element.hidden = !element.dataset.screen.split(' ').includes(currentScreen);
   }
 
   for (const link of screenLinks) {

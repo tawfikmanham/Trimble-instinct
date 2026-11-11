@@ -19,7 +19,7 @@
             <path fill="currentColor" d="M12 22a2 2 0 0 0 2-2h-4a2 2 0 0 0 2 2Zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4a1.5 1.5 0 0 0-3 0v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2Z"/>
           </svg>
           <span class="alerts-count" data-screen="navigation" aria-label="4 notifications" role="img">4</span>
-          <span class="alerts-count" data-screen="summary" aria-label="2 notifications" role="img" hidden>2</span>
+          <span class="alerts-count" data-screen="summary hos" aria-label="2 notifications" role="img" hidden>2</span>
         </div>
         <button class="duty" type="button" aria-haspopup="dialog" aria-controls="duty-dialog" aria-expanded="false">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" aria-hidden="true">
@@ -63,13 +63,13 @@
           </svg>
           <span>SUMMARY</span>
         </a>
-        <div class="tile">
+        <a class="tile" href="#hos">
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/>
             <path fill="currentColor" d="M12 5.4a6.6 6.6 0 1 1-4.67 11.27L12 12Z"/>
           </svg>
-          HOS
-        </div>
+          <span>HOS</span>
+        </a>
         <a class="tile" href="#navigation" aria-current="page">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M12 2.5 2.7 21.4l9.3-3.5 9.3 3.5Z"/>
@@ -103,6 +103,26 @@
               </svg>
             </div>
           </div>
+        </div>
+      </section>
+      <section id="hos" class="hos-screen" data-screen="hos" aria-labelledby="hos-title" hidden>
+        <div class="hos-content">
+          <h2 id="hos-title">Available Drive Time | <strong>US 8 day</strong></h2>
+          <dl class="hos-times">
+            <div class="hos-reading hos-break">
+              <dt>Break / 08h</dt>
+              <dd><strong>00:27</strong><meter min="0" max="480" value="27" aria-label="Break time remaining, 27 minutes out of 8 hours"></meter></dd>
+            </div>
+            <div class="hos-reading hos-driving">
+              <dt>Driving / 11h</dt>
+              <dd><strong>01:23</strong><meter min="0" max="660" value="83" aria-label="Driving time remaining, 1 hour 23 minutes out of 11 hours"></meter></dd>
+            </div>
+            <div class="hos-reading hos-duty">
+              <dt>Duty / 14h</dt>
+              <dd><strong>04:17</strong><meter min="0" max="840" value="257" aria-label="Duty time remaining, 4 hours 17 minutes out of 14 hours"></meter></dd>
+            </div>
+          </dl>
+          <p class="hos-distance">Distance driven today <strong>132 mi</strong></p>
         </div>
       </section>
       <section id="navigation" class="navigation" data-screen="navigation" aria-label="Current route">
