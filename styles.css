@@ -80,12 +80,83 @@ body {
   height: 5.9cqw;
   justify-content: space-between;
   background: #333543;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
   padding-inline: 2cqw;
   font-size: 2cqw;
   letter-spacing: .05cqw;
 }
 .duty svg { width: 2.35cqw; }
 .duty strong { font-weight: 900; }
+.duty:focus-visible, .duty-close:focus-visible, .duty-option:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: -4px;
+}
+.duty-dialog {
+  width: clamp(264px, 38cqw, 640px);
+  max-width: calc(100% - 32px);
+  max-height: calc(100dvh - 32px);
+  padding: 0;
+  border: 1px solid #484953;
+  border-radius: var(--space-1);
+  background: #242432;
+  color: inherit;
+  box-shadow: 0 8px 32px #0008;
+}
+.duty-dialog::backdrop { background: #0009; }
+.duty-panel { padding: var(--space-2); }
+.duty-symbols { display: none; }
+.duty-dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-1);
+  margin-bottom: var(--space-2);
+}
+.duty-dialog-header h2 { margin: 0; font-size: clamp(16px, 1.55cqw, 26px); }
+.duty-close {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+  border: 0;
+  border-radius: 4px;
+  color: inherit;
+  background: transparent;
+  cursor: pointer;
+}
+.duty-close svg { width: 100%; }
+.duty-options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+.duty-option {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  place-items: center;
+  gap: var(--space-1);
+  min-height: 72px;
+  aspect-ratio: 1;
+  padding: var(--space-1) 4px;
+  border: 0;
+  color: #fafbfc;
+  font: inherit;
+  font-size: clamp(10px, 1.12cqw, 18px);
+  font-weight: 700;
+  cursor: pointer;
+}
+.duty-option svg { width: 37%; }
+.duty-option[aria-pressed="true"] { box-shadow: inset 0 0 0 2px #ffce00; }
+.duty-option.driving { background: #287d39; }
+.duty-option.on { background: #e99a26; color: #242432; }
+.duty-option.sleeper { background: #1e76a8; }
+.duty-option.yard { background: #642ac5; }
+.duty-option.personal { background: #43494f; }
+.duty-option.off { background: #ab2026; }
 .profile {
   display: grid;
   place-items: center;

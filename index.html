@@ -21,18 +21,40 @@
           <span class="alerts-count" data-screen="navigation" aria-label="4 notifications" role="img">4</span>
           <span class="alerts-count" data-screen="summary" aria-label="2 notifications" role="img" hidden>2</span>
         </div>
-        <div class="duty">
+        <button class="duty" type="button" aria-haspopup="dialog" aria-controls="duty-dialog" aria-expanded="false">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" aria-hidden="true">
             <circle cx="12" cy="14" r="8"/>
             <path d="M12 14v-4M9.5 2h5m3.2 5 1.5-1.5"/>
           </svg>
-          <strong data-screen="navigation">ON(YM)</strong>
-          <strong data-screen="summary" hidden>ON(D)</strong>
+          <strong id="duty-label">ON(YM)</strong>
           <span class="chevron" aria-hidden="true"></span>
-        </div>
+        </button>
         <div class="profile" aria-label="TM profile">TM</div>
       </div>
     </header>
+    <dialog id="duty-dialog" class="duty-dialog" aria-labelledby="duty-title">
+      <div class="duty-panel">
+        <svg class="duty-symbols" aria-hidden="true">
+          <symbol id="duty-car" viewBox="0 0 24 24">
+            <path fill="currentColor" fill-rule="evenodd" d="M5.2 3h13.6l2.7 7.5V20a1 1 0 0 1-2 0v-1.5h-15V20a1 1 0 0 1-2 0v-9.5L5.2 3Zm1.4 1.7-1.8 5.2h14.4l-1.8-5.2H6.6ZM7 12a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Zm10 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Z"/>
+          </symbol>
+        </svg>
+        <header class="duty-dialog-header">
+          <h2 id="duty-title">Choose Status</h2>
+          <button class="duty-close" type="button" aria-label="Close status chooser">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+          </button>
+        </header>
+        <div class="duty-options" role="group" aria-label="Duty status">
+          <button class="duty-option driving" type="button" data-duty="ON(D)" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#duty-car"/></svg>Driving</button>
+          <button class="duty-option on" type="button" data-duty="ON" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#duty-car"/></svg>ON</button>
+          <button class="duty-option sleeper" type="button" data-duty="SB" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M2 19v-8h20v8M2 16h20M4 11V7a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v4m0-4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v4"/></svg>Sleeper Berth</button>
+          <button class="duty-option yard" type="button" data-duty="ON(YM)" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#duty-car"/></svg>Yard Move</button>
+          <button class="duty-option personal" type="button" data-duty="OFF(PC)" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#duty-car"/></svg>Personal Conveyance</button>
+          <button class="duty-option off" type="button" data-duty="OFF" aria-pressed="false"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 4h6v16H4zM14 4h6v16h-6z"/></svg>OFF</button>
+        </div>
+      </div>
+    </dialog>
     <div class="workspace">
       <nav class="sections" aria-label="App sections" tabindex="0">
         <a class="tile" href="#summary">
