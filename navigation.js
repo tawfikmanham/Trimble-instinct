@@ -56,6 +56,7 @@ function setMapView(view) {
     option.setAttribute('aria-pressed', String(option.dataset.mapView === view));
   }
   resetMapPosition();
+  if (mapViewport.dataset.following !== undefined) renderDrive();
 }
 
 function setMapMenuOpen(open) {
@@ -149,6 +150,129 @@ let startedAt;
 let playbackTimer;
 let displayedTime = '0:00';
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+const driveButton = document.querySelector('.map-demo');
+const route = document.querySelector('#demo-route');
+const mapPlane = document.querySelector('.map-plane');
+const mapPosition = document.querySelector('.map-position');
+const vehicleStatus = document.querySelector('.vehicle strong');
+const turnArrow = document.querySelector('.next-turn .material-symbol');
+const turnDistance = document.querySelector('.turn-distance');
+const thenTurn = document.querySelector('.then-turn');
+const followingArrow = thenTurn.querySelector('.material-symbol');
+const followingDistance = document.querySelector('.following-distance');
+const streetName = document.querySelector('.street');
+const tripMiles = document.querySelector('.remaining-miles');
+const tripEta = document.querySelector('.arrival-time');
+const instructions = toggle.firstElementChild;
+const upcoming = [...preview.querySelectorAll('li')].map((item) => ({
+  item,
+  icon: item.querySelector('.material-symbol'),
+  title: item.querySelector('strong'),
+  street: item.querySelector('div span'),
+  distance: item.querySelector('.distance'),
+}));
+const firstTurn = 223 + Math.hypot(117, 30);
+const driveStart = firstTurn - Math.hypot(44, 11);
+const driveStages = [
+  { time: 0, at: driveStart },
+  { time: 4.5, at: firstTurn, icon: 'turn_left', cue: 'Turn left', street: 'Xerxes Avenue South', feet: 350 },
+  { time: 9, at: firstTurn + 118, icon: 'turn_right', cue: 'Turn right', street: 'W 82nd Street', feet: 50 },
+  { time: 14, at: firstTurn + 287, icon: 'turn_left', cue: 'Turn left', street: 'Penn Avenue', feet: 850 },
+  { time: 19, at: firstTurn + 354, icon: 'turn_right', cue: 'Turn right', street: 'W 81st Street', feet: 400 },
+  { time: 24, at: firstTurn + 527, icon: 'flag', cue: 'Arrive at destination', street: 'Destination', feet: 950 },
+];
+const driveDuration = driveStages.at(-1).time;
+let driveTime = 0;
+let driveStartedAt = 0;
+let driveFrame;
+
+function setText(element, value) {
+  const text = String(value);
+  if (element.textContent !== text) element.textContent = text;
+}
+
+function renderDrive() {
+  const total = route.getTotalLength();
+  const arrived = driveTime >= driveDuration;
+  const nextIndex = arrived ? driveStages.length - 1 : driveStages.findIndex((stage) => stage.time > driveTime);
+  const next = driveStages[nextIndex];
+  const previous = driveStages[nextIndex - 1];
+  const following = driveStages[nextIndex + 1];
+  const progress = (driveTime - previous.time) / (next.time - previous.time);
+  const distance = arrived ? total : previous.at + (next.at - previous.at) * progress;
+  const point = route.getPointAtLength(distance);
+  const behind = route.getPointAtLength(Math.max(0, distance - 10));
+  const ahead = route.getPointAtLength(Math.min(total, distance + 10));
+  const bearing = Math.atan2(ahead.y - behind.y, ahead.x - behind.x) * 180 / Math.PI + 90;
+  mapPosition.setAttribute('transform', `translate(${point.x} ${point.y}) rotate(${bearing})`);
+
+  const followingVehicle = mapViewport.dataset.view === 'guidance';
+  mapViewport.dataset.following = String(followingVehicle);
+  mapPlane.setAttribute('viewBox', followingVehicle
+    ? `${point.x - 266.6} ${point.y - 186} 620 310`
+    : '0 0 1000 500');
+  mapViewport.style.setProperty('--map-bearing', followingVehicle && !reducedMotion.matches ? `${-bearing}deg` : '0deg');
+
+  const feet = Math.ceil(next.feet * (1 - progress) / 10) * 10;
+  setText(turnArrow, next.icon);
+  setText(turnDistance, feet);
+  setText(streetName, next.street);
+  thenTurn.hidden = !following || arrived;
+  if (following) {
+    setText(followingArrow, following.icon);
+    followingArrow.setAttribute('aria-label', following.cue);
+    setText(followingDistance, `${following.feet} ft`);
+  }
+  setText(instructions, arrived ? 'You have arrived.' : `${next.cue}.${following ? ` Then ${following.cue.toLowerCase()}.` : ''}`);
+  setText(tripMiles, (3.2 * Math.max(0, (total - distance) / (total - driveStart))).toFixed(1));
+  setText(tripEta, `12:${String(12 - Math.floor(driveTime / 6)).padStart(2, '0')}`);
+
+  for (const [index, row] of upcoming.entries()) {
+    const stage = index === 0 ? next : following;
+    row.item.hidden = !stage;
+    if (!stage) continue;
+    setText(row.icon, stage.icon);
+    setText(row.title, arrived ? 'Arrived' : stage.cue);
+    setText(row.street, stage.street);
+    setText(row.distance, `${index === 0 ? feet : stage.feet} ft`);
+  }
+}
+
+function setDriveButton(icon, label) {
+  setText(driveButton.firstElementChild, icon);
+  setText(driveButton.lastElementChild, label);
+}
+
+function stopDrive() {
+  cancelAnimationFrame(driveFrame);
+  driveFrame = undefined;
+  setText(vehicleStatus, 'STOPPED');
+  if (driveTime >= driveDuration) setDriveButton('replay', 'Replay drive');
+  else setDriveButton('play_arrow', 'Resume drive');
+}
+
+function advanceDrive(now) {
+  driveTime = Math.min(driveDuration, (now - driveStartedAt) / 1000);
+  renderDrive();
+  if (driveTime < driveDuration) driveFrame = requestAnimationFrame(advanceDrive);
+  else stopDrive();
+}
+
+driveButton.addEventListener('click', () => {
+  if (driveFrame !== undefined) {
+    stopDrive();
+    return;
+  }
+  if (driveTime >= driveDuration) {
+    driveTime = 0;
+    resetMapPosition();
+  }
+  driveStartedAt = performance.now() - driveTime * 1000;
+  setText(vehicleStatus, 'DRIVING');
+  setDriveButton('pause', 'Pause drive');
+  renderDrive();
+  driveFrame = requestAnimationFrame(advanceDrive);
+});
 const timerDigits = Array.from(displayedTime, (character) => {
   const cell = document.createElement('span');
   cell.textContent = character;
@@ -221,6 +345,7 @@ audioButton.addEventListener('click', () => {
 function showCurrentScreen() {
   const activeHash = screenLinks.find((link) => link.hash === location.hash)?.hash;
   const currentScreen = activeHash?.slice(1) ?? 'navigation';
+  if (currentScreen !== 'navigation' && driveFrame !== undefined) stopDrive();
 
   for (const element of screenElements) {
     element.hidden = !element.dataset.screen.split(' ').includes(currentScreen);

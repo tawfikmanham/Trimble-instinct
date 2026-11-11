@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#22252e">
   <title>Navigation prototype · Baseline</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&amp;icon_names=add,bed,close,directions_car,expand_more,explore,map,menu,navigation,notifications,pause,remove,search_hands_free,star,timelapse,timer,turn_left,turn_right,volume_off,volume_up&amp;display=block">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&amp;icon_names=add,bed,close,directions_car,expand_more,explore,flag,map,menu,navigation,notifications,pause,play_arrow,remove,replay,search_hands_free,star,timelapse,timer,turn_left,turn_right,volume_off,volume_up&amp;display=block">
   <link rel="stylesheet" href="styles.css">
   <script src="navigation.js" defer></script>
 </head>
@@ -190,16 +190,17 @@
         </div>
         <div class="map-speed" role="img" aria-label="Speed limit 35 miles per hour"><span>SPEED<br>LIMIT</span><strong>35</strong></div>
         <button class="map-control map-voice" type="button" aria-label="Mute voice guidance" aria-pressed="false"><span class="material-symbol" aria-hidden="true">volume_up</span></button>
+        <button class="map-demo" type="button"><span class="material-symbol" aria-hidden="true">play_arrow</span><span>Play drive</span></button>
         <div class="guidance">
           <div class="next-turn">
             <span class="material-symbol" aria-hidden="true">turn_left</span>
-            <div>350<span> ft</span></div>
+            <div><b class="turn-distance">350</b><span> ft</span></div>
           </div>
-          <div class="then-turn"><span class="material-symbol" role="img" aria-label="Then turn right">turn_right</span>50 ft</div>
+          <div class="then-turn"><span class="material-symbol" role="img" aria-label="Then turn right">turn_right</span><span class="following-distance">50 ft</span></div>
           <div class="street">Xerxes Avenue South</div>
           <div class="trip">
-            <div><span>DIST</span><strong>3.2<small> MI</small></strong></div>
-            <div><span>ETA</span><strong>12:12</strong></div>
+            <div><span>DIST</span><strong><b class="remaining-miles">3.2</b><small> MI</small></strong></div>
+            <div><span>ETA</span><strong class="arrival-time">12:12</strong></div>
           </div>
           <button class="preview-toggle" type="button" aria-expanded="false" aria-controls="turn-preview">
             <span>Turn left. Then turn right.</span>
