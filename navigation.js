@@ -7,6 +7,20 @@ const dutyLabel = document.querySelector('#duty-label');
 const dutyDialog = document.querySelector('#duty-dialog');
 const dutyOptions = [...dutyDialog.querySelectorAll('[data-duty]')];
 let selectedDuty;
+const fuelGauge = document.querySelector('.fuel-gauge');
+const fuelReading = fuelGauge.querySelector('.fuel-reading');
+const fuelSamples = [13.5, 6.2, 9.8, 15];
+const fuelScale = 15;
+let fuelSampleIndex = 0;
+
+fuelGauge.addEventListener('click', () => {
+  fuelSampleIndex = (fuelSampleIndex + 1) % fuelSamples.length;
+  const reading = fuelSamples[fuelSampleIndex].toFixed(1);
+  fuelReading.textContent = reading;
+  fuelGauge.style.setProperty('--fuel-progress', fuelSamples[fuelSampleIndex] / fuelScale * 100);
+  fuelGauge.setAttribute('aria-label', `${reading} MPG, average 11.8 MPG. Cycle sample reading.`);
+});
+
 const audioButton = document.querySelector('.audio-play');
 const audioElapsed = document.querySelector('#audio-elapsed');
 const audioTrack = document.querySelector('.audio-track');

@@ -244,25 +244,42 @@ a.tile:focus-visible { outline: .16cqw solid #fff; outline-offset: -.3cqw; }
   width: min(35cqw, 85cqh);
   aspect-ratio: 1;
   border-radius: 50%;
-  box-shadow: inset 0 0 1.8cqw .32cqw #181a24b5;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   line-height: 1;
 }
-.fuel-gauge::before, .fuel-gauge::after {
-  content: "";
+.fuel-gauge:focus-visible { outline: 2px solid #fff; outline-offset: 8px; }
+.fuel-ring {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: currentColor;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
 }
-.fuel-gauge::before { left: -.55cqw; width: 2.75cqw; height: .13cqw; }
-.fuel-gauge::after { left: -1.08cqw; width: 1.06cqw; aspect-ratio: 1; border-radius: 50%; }
+.fuel-ring-track, .fuel-ring-fill { fill: none; stroke-width: 12.5; }
+.fuel-ring-track { stroke: #4a4d59; }
+.fuel-ring-fill {
+  stroke: url(#fuel-gradient);
+  stroke-dasharray: var(--fuel-progress, 90) 100;
+  transform: rotate(180deg);
+  transform-origin: center;
+  transition: stroke-dasharray 230ms cubic-bezier(.65, 0, .35, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .fuel-ring-fill { transition: none; }
+}
 .fuel-average { font-size: min(1.7cqw, 4.15cqh); margin-bottom: var(--space-1); }
 .fuel-average strong { font-size: min(2.3cqw, 5.65cqh); }
-.fuel-reading { font-size: min(7.35cqw, 17.8cqh); }
+.fuel-reading { font-size: min(7.1cqw, 17.2cqh); font-variant-numeric: tabular-nums; }
 .fuel-unit { font-size: min(2.9cqw, 7cqh); }
 
 .summary-widgets {
