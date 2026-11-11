@@ -38,7 +38,7 @@ body {
 }
 
 .vehicle { gap: 1.83cqw; font-size: 2.5cqw; letter-spacing: .08cqw; }
-.vehicle img { width: 4cqw; }
+.vehicle img { width: 4cqw; clip-path: circle(46% at center); }
 .vehicle strong { font-weight: 900; }
 .driver { gap: 1.9cqw; transform: translateY(-.36cqw); }
 .region {
@@ -82,7 +82,7 @@ body {
   font-size: 2cqw;
   letter-spacing: .05cqw;
 }
-.duty img { width: 2.35cqw; }
+.duty svg { width: 2.35cqw; }
 .duty strong { font-weight: 900; }
 .profile {
   display: grid;
@@ -138,7 +138,7 @@ body {
 }
 a.tile { color: inherit; text-decoration: none; }
 a.tile:focus-visible { outline: .16cqw solid #fff; outline-offset: -.3cqw; }
-.tile img { width: 3.2cqw; }
+.tile svg { width: 3.2cqw; }
 .tile[aria-current="page"] span {
   position: relative;
 }
@@ -205,7 +205,7 @@ a.tile:focus-visible { outline: .16cqw solid #fff; outline-offset: -.3cqw; }
 .audio-card {
   display: grid;
   grid-template-columns: 1fr auto;
-  align-items: end;
+  align-items: center;
   gap: 1.25cqw;
   padding: .68cqw 3.35cqw .68cqw 2.5cqw;
 }
@@ -217,7 +217,15 @@ a.tile:focus-visible { outline: .16cqw solid #fff; outline-offset: -.3cqw; }
   border-bottom: .21cqw solid #777984;
   font-size: 1.6cqw;
 }
-.audio-card img { width: 8.05cqw; clip-path: circle(48% at center); }
+.audio-play {
+  display: grid;
+  place-items: center;
+  width: 7.6cqw;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #056295;
+}
+.audio-play svg { width: 4.15cqw; }
 
 .navigation {
   position: relative;
